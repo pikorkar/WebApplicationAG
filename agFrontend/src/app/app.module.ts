@@ -9,7 +9,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { AuthInterceptorService } from './services/authentication/auth-interceptor.service';
 import { ErrorInterceptorService } from './services/authentication/error-interceptor.service';
-import { fakeBackendProvider } from './helpers/fake-backend';
 
 @NgModule({
   declarations: [
@@ -26,9 +25,6 @@ import { fakeBackendProvider } from './helpers/fake-backend';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
-
-    // provider used to create fake backend
-    fakeBackendProvider
 ],
   bootstrap: [AppComponent]
 })

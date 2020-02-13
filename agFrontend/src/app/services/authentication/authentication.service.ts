@@ -22,7 +22,7 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
+    return this.http.post<any>(`${environment.apiUrl}/user/authenticate`, { username, password })
       .pipe(
         map(user => {
           user.authdata = window.btoa(username + ":" + password);
