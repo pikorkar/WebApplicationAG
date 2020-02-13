@@ -25,9 +25,12 @@ export class AuthenticationService {
     return this.http.post<any>(`${environment.apiUrl}/user/authenticate`, { username, password })
       .pipe(
         map(user => {
-          user.authdata = window.btoa(username + ":" + password);
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
+          // login success - jwt token in the response
+          if (user && user.token) {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            this.currentUserSubject.next(user);
+          }
+
           return user;
         }
         ));

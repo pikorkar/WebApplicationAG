@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using agBackend.Services;
 using agBackend.Models;
-using System.Linq;
+using agBackend.Entities;
 
 namespace agBackend.Controllers
 {
@@ -29,10 +29,26 @@ namespace agBackend.Controllers
             return Ok(user);
         }
 
+        [Authorize(Roles = Role.Admin)]
         [HttpGet]
         public IActionResult GetAll() {
             var users = _userService.GetAll();
             return Ok(users);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id) {
+            var currentUserId = int.Parse(User.Identity.Name);
+
+            if (id != currentUserId && !User.IsInRole(Role.Admin))
+                return Forbid();
+
+            var user = _userService.GetById(id);
+
+            if (user == null)
+                return NotFound();
+
+            return Ok(user);
         }
       
     }
