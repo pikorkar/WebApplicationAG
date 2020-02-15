@@ -4,7 +4,7 @@
         Password: test
     </div>
     <div class="card">
-        <h4 class="card-header">Angular 8 Basic Auth Login Example</h4>
+        <h4 class="card-header">Login</h4>
         <div class="card-body">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
@@ -25,6 +25,7 @@
                     <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
                     Login
                 </button>
+                <a routerLink="/register" class="btn btn-link">Register</a>
                 <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
             </form>
         </div>

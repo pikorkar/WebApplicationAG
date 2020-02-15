@@ -1,8 +1,23 @@
 <!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-  <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/">Home</a>
-      <a class="nav-item nav-link" (click)="logout()">Logout</a>
+<nav class="navbar navbar-expand navbar-dark bg-primary" *ngIf="currentUser">
+  <div class="container-fluid">
+    <div class="nav navbar-nav">
+      <a class="nav-item nav-link active" routerLink="/">Dashboard</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle class="nav-link dropdown-toggle" href="#" id="navbarDropdown" type="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{this.currentUser.firstName}} {{this.currentUser.lastName}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: 50px;">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+      </li>
+    </ul>
   </div>
 </nav>
 

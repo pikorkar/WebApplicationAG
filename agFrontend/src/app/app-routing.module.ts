@@ -4,11 +4,13 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuardService } from './services/authentication/auth-guard.service';
 import { Role } from './models/role';
+import { RegisterComponent } from './register/register.component';
 
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent, canActivate: [AuthGuardService], data: { roles: [Role.Admin]} },
+  { path: '', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
