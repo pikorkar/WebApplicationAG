@@ -10,19 +10,19 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './services/authentication/auth-interceptor.service';
 import { ErrorInterceptorService } from './services/authentication/error-interceptor.service';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { RegisterComponent } from './users/user-register/user-register.component';
+import { UserRegisterComponent } from './users/user-register/user-register.component';
 import { UserManagerComponent } from './users/user-manager/user-manager.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { UpdateComponent } from './users/user-update/user-update.component';
+import { UserUpdateComponent } from './users/user-update/user-update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    RegisterComponent,
+    UserRegisterComponent,
     UserManagerComponent,
-    UpdateComponent
+    UserUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +40,7 @@ import { UpdateComponent } from './users/user-update/user-update.component';
     AppComponent
   ],
   entryComponents: [
-    UpdateComponent
+    UserUpdateComponent
   ]
 })
 export class AppModule { }

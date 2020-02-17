@@ -1,14 +1,46 @@
 <!-- HEADER -->
 <div class="modal-header">
-  <h4 class="modal-title">Hi there!</h4>
+  <h4 class="modal-title">Update user: <span *ngIf="!loading">{{user.username}}</span></h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <!-- BODY -->
 <div class="modal-body">
-</div>
-<!-- FOOTER -->
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  <!-- loading -->
+  <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+  <!-- form -->
+  <form *ngIf="!loading" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" formControlName="firstName" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" formControlName="lastName" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" formControlName="username" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+    </div>
+    <div class="form-group">
+      <label for="role">Role</label>
+      <select formControlName="role" class="form-control" id="role"
+        [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+        <option [value]="role.value" *ngFor="let role of roles">{{role.label}}</option>
+      </select>
+    </div>
+     <!-- FOOTER inside form-->
+    <div class="form-group">
+      <button [disabled]="submittedLoading" class="btn btn-primary">
+        <span *ngIf="submittedLoading" class="spinner-border spinner-border-sm mr-1"></span>
+        Update
+      </button>
+      <button type="button" class="btn btn-link" (click)="activeModal.close('Close click')">Cancel</button>
+    </div>
+  </form>
 </div>

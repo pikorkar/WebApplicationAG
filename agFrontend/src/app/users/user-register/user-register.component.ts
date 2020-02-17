@@ -11,7 +11,7 @@ import { Role } from '../models/role';
   templateUrl: './user-register.component.html',
   styleUrls: ['./user-register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class UserRegisterComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;
   submitted = false;
@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
       lastName: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      confirmPassword: ['', [Validators.required, RegisterComponent.matchValues('password')]],
+      confirmPassword: ['', [Validators.required, UserRegisterComponent.matchValues('password')]],
       role: ['', Validators.required]
     });
   }

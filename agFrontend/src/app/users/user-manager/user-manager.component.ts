@@ -3,7 +3,7 @@ import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 import { first } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UpdateComponent } from '../user-update/user-update.component';
+import { UserUpdateComponent } from '../user-update/user-update.component';
 
 @Component({
   selector: 'app-user-manager',
@@ -34,7 +34,7 @@ export class UserManagerComponent implements OnInit {
   }
 
   updateUser(id: number) {
-    const modalRef = this.modalService.open(UpdateComponent);
+    const modalRef = this.modalService.open(UserUpdateComponent);
     modalRef.componentInstance.id = id;
   }
 
