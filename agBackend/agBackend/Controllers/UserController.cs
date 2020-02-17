@@ -61,13 +61,14 @@ namespace agBackend.Controllers
             //token end
 
             // return user with token
-            return Ok(new {
+            return Ok(new
+            {
                 Id = user.Id,
                 Username = user.Username,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Token = tokenString,
-                Role = user.Role
+                Role = user.Role.Trim()
             });
         }
 

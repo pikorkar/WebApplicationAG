@@ -61,6 +61,7 @@ namespace agBackend.Services
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
 
+            user.Role = user.Role.Trim();
             //return user.WithoutPassword();
             return user;
         }

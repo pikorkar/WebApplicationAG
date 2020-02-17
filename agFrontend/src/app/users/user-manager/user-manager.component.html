@@ -1,0 +1,11 @@
+<div class="card mt-4">
+    <h4 class="card-header">Manage users</h4>
+    <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+    <ul *ngIf="users && !loading" class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let user of users; let i = index">
+            {{user.firstName}} {{user.lastName}}, {{user.username}}
+            <button type="button" class="btn btn-primary" (click)="updateUser(user.id)">Launch demo modal</button>
+            <button type="button" class="btn btn-danger" (click)="deletUser(user.id)">Delete</button>
+        </li>
+    </ul>
+</div>
