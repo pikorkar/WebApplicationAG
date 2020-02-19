@@ -39,6 +39,8 @@ export class UserUpdateComponent implements OnInit {
       user => {
         this.user = user;
 
+console.log("++++++", user.role);
+
         this.updateForm = this.formBuilder.group({
           firstName: [user.firstName],
           lastName: [user.lastName],
