@@ -10,8 +10,8 @@ export class SprintService {
 
   constructor(private http: HttpClient) { }
 
-  getAll() {
-    return this.http.get<Sprint[]>(`${environment.apiUrl}/sprint`);
+  getAllByProject(id: number) {
+    return this.http.get<Sprint[]>(`${environment.apiUrl}/sprint/project/${id}`);
   }
 
 }

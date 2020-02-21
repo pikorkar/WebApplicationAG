@@ -7,5 +7,8 @@ namespace agBackend.Models
 {
     public class EngineeringTask
     {
+        public int Id { get; set; }
+        public int Name { get; set; }
+        public int UserStoryId { get; set; }
     }
 }

@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using agBackend.Entities;
 using agBackend.Helpers;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
-using System.Security.Claims;
 
 namespace agBackend.Services
 {
@@ -61,7 +55,6 @@ namespace agBackend.Services
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
 
-            user.Role = user.Role.Trim();
             //return user.WithoutPassword();
             return user;
         }

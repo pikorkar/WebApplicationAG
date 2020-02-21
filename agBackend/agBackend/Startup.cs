@@ -55,6 +55,11 @@ namespace agBackend
             });
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ISprintService, SprintService>();
+            services.AddScoped<IUserStoryService, UserStoryService>();
+            services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<IEngineeringTaskService, EngineeringTaskService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

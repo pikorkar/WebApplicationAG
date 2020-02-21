@@ -18,22 +18,23 @@ namespace agBackend.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class UserStoryController : ControllerBase
+    public class SprintController : ControllerBase
     {
-        private IUserStoryService _userStoryService;
+        private ISprintService _userSprintService;
         private IMapper _mapper;
 
-        public UserStoryController(IUserStoryService userStoryService,
-            IMapper mapper) {
-            _userStoryService = userStoryService;
+        public SprintController(ISprintService userSprintService,
+            IMapper mapper)
+        {
+            _userSprintService = userSprintService;
             _mapper = mapper;
         }
 
 
-        [HttpGet("sprint/{id}")]
-        public IActionResult GetAllBySprint(int id)
+        [HttpGet("project/{id}")]
+        public IActionResult GetAllByProject(int id)
         {
-            var model = _userStoryService.GetAllBySprint(id);
+            var model = _userSprintService.GetAllByProject(id);
 
             if (model == null)
                 return NotFound();

@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace agBackend.Models
 {
     public class Sprint
     {
-        int Id { get; set; }
-        UserStory[] userStory { get; set; }
+        public int Id { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+        public int ProjectId { get; set; }
     }
 }

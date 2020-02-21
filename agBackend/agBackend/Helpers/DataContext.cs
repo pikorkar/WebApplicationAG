@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using agBackend.Entities;
+using agBackend.Models;
 
 namespace agBackend.Helpers
 {
@@ -19,6 +20,11 @@ namespace agBackend.Helpers
         }
 
         public DbSet<User> Users { get; set;  }
+        public DbSet<Sprint> Sprints { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<UserStory> UserStories { get; set; }
+        public DbSet<EngineeringTask> EngineeringTasks { get; set; }
+
     }
 }
 

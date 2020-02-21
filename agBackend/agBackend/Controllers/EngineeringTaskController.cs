@@ -13,27 +13,28 @@ using System.Text;
 using System.Security.Claims;
 using System.Collections.Generic;
 
+
 namespace agBackend.Controllers
 {
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class UserStoryController : ControllerBase
+    public class EngineeringTaskController : ControllerBase
     {
-        private IUserStoryService _userStoryService;
+        private IEngineeringTaskService _engineeringTaskService;
         private IMapper _mapper;
 
-        public UserStoryController(IUserStoryService userStoryService,
-            IMapper mapper) {
-            _userStoryService = userStoryService;
+        public EngineeringTaskController(IEngineeringTaskService engineeringTaskService,
+            IMapper mapper)
+        {
+            _engineeringTaskService = engineeringTaskService;
             _mapper = mapper;
         }
 
-
-        [HttpGet("sprint/{id}")]
-        public IActionResult GetAllBySprint(int id)
+        [HttpGet("userstory/{id}")]
+        public IActionResult GetAllByUserStory(int id)
         {
-            var model = _userStoryService.GetAllBySprint(id);
+            var model = _engineeringTaskService.GetAllByUserStory(id);
 
             if (model == null)
                 return NotFound();

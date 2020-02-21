@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { UserStory } from '../models/user-story';
+import { Project } from '../models/project';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserStoryService {
+export class ProjectService {
 
   constructor(private http: HttpClient) { }
 
-  getAllBySprint(id: number) {
-    return this.http.get<UserStory[]>(`${environment.apiUrl}/userstory/sprint/${id}`);
+  getAll() {
+    return this.http.get<Project[]>(`${environment.apiUrl}/project`);
   }
 }
