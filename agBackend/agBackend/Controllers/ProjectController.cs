@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using agBackend.Services;
 using AutoMapper;
+using agBackend.Models;
+using agBackend.Helpers;
 
 namespace agBackend.Controllers
 {
@@ -25,6 +27,20 @@ namespace agBackend.Controllers
         {
             var model = _projectService.GetAll();
             return Ok(model);
+        }
+
+        [HttpPost("create")]
+        public IActionResult Create([FromBody]ProjectCreateModel model)
+        {
+            try
+            {
+                _projectService.Create(model);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
     }

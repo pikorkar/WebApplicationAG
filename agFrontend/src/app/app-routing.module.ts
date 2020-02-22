@@ -6,6 +6,8 @@ import { AuthGuardService } from './services/authentication/auth-guard.service';
 import { Role } from './users/models/role';
 import { UserRegisterComponent } from './users/user-register/user-register.component';
 import { UserManagerComponent } from './users/user-manager/user-manager.component';
+import { ProjectComponent } from './project/project.component';
+import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
 
 
 const routes: Routes = [
@@ -13,6 +15,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: UserRegisterComponent },
   { path: 'userManager', component: UserManagerComponent, canActivate: [AuthGuardService], data: { roles: [Role.Admin] } },
+  { path: 'projects', component: ProjectComponent, canActivate: [AuthGuardService] },
+  { path: 'projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuardService] },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

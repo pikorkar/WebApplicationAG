@@ -20,10 +20,10 @@ namespace agBackend.Helpers
         }
 
         public DbSet<User> Users { get; set;  }
-        public DbSet<Sprint> Sprints { get; set; }
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<UserStory> UserStories { get; set; }
-        public DbSet<EngineeringTask> EngineeringTasks { get; set; }
+        public DbSet<SprintModel> Sprints { get; set; }
+        public DbSet<ProjectModel> Projects { get; set; }
+        public DbSet<UserStoryModel> UserStories { get; set; }
+        public DbSet<EngineeringTaskModel> EngineeringTasks { get; set; }
 
     }
 }

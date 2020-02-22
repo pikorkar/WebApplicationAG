@@ -1,0 +1,23 @@
+<h1 class="mt-4">Project name</h1>
+<div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+<div *ngIf="this.sprints.length <= 0" class="alert alert-danger" role="alert">
+    No data have been found.
+</div>
+<!-- <button type="button" class="btn btn-primary" (click)="create()">+ create</button> -->
+<div *ngIf="this.sprints.length > 0" class="card mt-4">
+    <div class="card-header">
+        <h4>Sprints</h4>
+        <ul class="nav nav-pills">
+            <li class="nav-item" *ngFor="let sprint of sprints; let i = index">
+                <a class="nav-link" [ngClass]="{'active': sprint.active}" (click)="changeSprint(i)">{{i}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <!-- <h6>User story name?</h6>
+        <ul *ngIf="projects">
+            <li *ngFor="let project of projects">{{project.name}} {{project.sprintLength}} <button type="button"
+                    class="btn btn-primary" (click)="projectDetail(project.id)">Open</button></li>
+        </ul> -->
+    </div>
+</div>

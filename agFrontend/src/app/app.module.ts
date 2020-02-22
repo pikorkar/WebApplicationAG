@@ -14,6 +14,9 @@ import { UserRegisterComponent } from './users/user-register/user-register.compo
 import { UserManagerComponent } from './users/user-manager/user-manager.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserUpdateComponent } from './users/user-update/user-update.component';
+import { ProjectComponent } from './project/project.component';
+import { ProjectCreateComponent } from './project/project-create/project-create.component';
+import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
     DashboardComponent,
     UserRegisterComponent,
     UserManagerComponent,
-    UserUpdateComponent
+    UserUpdateComponent,
+    ProjectComponent,
+    ProjectCreateComponent,
+    ProjectDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +46,8 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
     AppComponent
   ],
   entryComponents: [
-    UserUpdateComponent
+    UserUpdateComponent,
+    ProjectCreateComponent
   ]
 })
 export class AppModule { }

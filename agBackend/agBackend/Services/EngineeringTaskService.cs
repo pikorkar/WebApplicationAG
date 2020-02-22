@@ -9,7 +9,7 @@ namespace agBackend.Services
 {
     public interface IEngineeringTaskService
     {
-        IEnumerable<EngineeringTask> GetAllByUserStory(int id);
+        IEnumerable<EngineeringTaskModel> GetAllByUserStory(int id);
 
     }
     public class EngineeringTaskService : IEngineeringTaskService
@@ -21,7 +21,7 @@ namespace agBackend.Services
             _context = context;
         }
 
-        public IEnumerable<EngineeringTask> GetAllByUserStory(int id)
+        public IEnumerable<EngineeringTaskModel> GetAllByUserStory(int id)
         {
             return _context.EngineeringTasks.Where(x => x.UserStoryId == id);
         }

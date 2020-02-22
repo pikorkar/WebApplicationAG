@@ -1,0 +1,19 @@
+<div class="card mt-4">
+    <div class="card-header">
+        <h4>Projects</h4>
+        <button type="button" class="btn btn-primary" (click)="create()">+ create</button>
+    </div>
+    <div class="card-body">
+        <!-- <h6>Users from secure api end point</h6>
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+        <ul *ngIf="users">
+            <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
+        </ul> -->
+        <h6>Projects</h6>
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+        <ul *ngIf="projects">
+            <li *ngFor="let project of projects">{{project.name}} {{project.sprintLength}} <button type="button"
+                    class="btn btn-primary" (click)="projectDetail(project.id)">Open</button></li>
+        </ul>
+    </div>
+</div>

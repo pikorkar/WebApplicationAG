@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace agBackend.Models
 {
-    public class EngineeringTask
+    public class ProjectModel
     {
         public int Id { get; set; }
-        public int Name { get; set; }
-        public int UserStoryId { get; set; }
+        public string Name { get; set; }
+        public int SprintLength { get; set; }
+        public DateTime StartDate { get; set; }
     }
 }

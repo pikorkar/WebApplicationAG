@@ -9,7 +9,7 @@ namespace agBackend.Services
 {
     public interface IUserStoryService
     {
-    IEnumerable<UserStory> GetAllBySprint(int id);
+    IEnumerable<UserStoryModel> GetAllBySprint(int id);
 
     }
 
@@ -22,7 +22,7 @@ namespace agBackend.Services
             _context = context;
         }
 
-        public IEnumerable<UserStory> GetAllBySprint(int id)
+        public IEnumerable<UserStoryModel> GetAllBySprint(int id)
         {
             return _context.UserStories.Where(x => x.SprintId == id);
         }

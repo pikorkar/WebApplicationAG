@@ -13,4 +13,8 @@ export class ProjectService {
   getAll() {
     return this.http.get<Project[]>(`${environment.apiUrl}/project`);
   }
+
+  create(project: Project) {
+    return this.http.post(`${environment.apiUrl}/project/create`, project);
+  }
 }

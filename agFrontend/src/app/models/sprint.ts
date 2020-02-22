@@ -1,5 +1,6 @@
 export class Sprint {
     id: number;
-    start: Date;
-    end: Date;
+    startDate: Date;
+    endDate: Date;
+    active: boolean = false;
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace agBackend.Models
 {
-    public class UserStory
+    public class UserStoryModel
     {
         public int Id { get; set; }
         public int Name { get; set; }
