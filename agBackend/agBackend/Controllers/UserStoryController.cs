@@ -41,5 +41,19 @@ namespace agBackend.Controllers
             return Ok(model);
         }
 
+        [HttpPost("create")]
+        public IActionResult Create([FromBody]UserStoryCreateModel model)
+        {
+            try
+            {
+                _userStoryService.Create(model);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
     }
 }

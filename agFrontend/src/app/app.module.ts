@@ -17,6 +17,7 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectCreateComponent } from './project/project-create/project-create.component';
 import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
+import { UserStoryCreateComponent } from './user-story/user-story-create/user-story-create.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ProjectDetailComponent } from './project/project-detail/project-detail.
     UserUpdateComponent,
     ProjectComponent,
     ProjectCreateComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    UserStoryCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import { ProjectDetailComponent } from './project/project-detail/project-detail.
   ],
   entryComponents: [
     UserUpdateComponent,
-    ProjectCreateComponent
+    ProjectCreateComponent,
+    UserStoryCreateComponent
   ]
 })
 export class AppModule { }

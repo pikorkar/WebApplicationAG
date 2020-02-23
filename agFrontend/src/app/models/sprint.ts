@@ -3,4 +3,5 @@ export class Sprint {
     startDate: Date;
     endDate: Date;
     active: boolean = false;
+    projectId: number;
 }

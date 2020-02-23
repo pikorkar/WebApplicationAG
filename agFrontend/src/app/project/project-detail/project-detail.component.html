@@ -12,12 +12,15 @@
                 <a class="nav-link" [ngClass]="{'active': sprint.active}" (click)="changeSprint(i)">{{i}}</a>
             </li>
         </ul>
+        {{this.activeSprint.startDate}} - {{this.activeSprint.endDate}}
     </div>
-    <div class="card-body">
-        <!-- <h6>User story name?</h6>
-        <ul *ngIf="projects">
-            <li *ngFor="let project of projects">{{project.name}} {{project.sprintLength}} <button type="button"
-                    class="btn btn-primary" (click)="projectDetail(project.id)">Open</button></li>
-        </ul> -->
-    </div>
+    <button type="button" class="btn btn-primary" (click)="createUserStory()">New User Story</button>
+    <ul *ngIf="this.userStories" class="list-group">
+        <li *ngFor="let userStory of userStories" class="list-group-item">
+            <h3>{{userStory.name}}</h3>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">25%</div>
+              </div>
+        </li>
+    </ul>
 </div>

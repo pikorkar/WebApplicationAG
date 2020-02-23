@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../users/models/user';
 import { UserService } from '../users/services/user.service';
 import { first } from 'rxjs/operators';
-import { ProjectService } from '../services/project.service';
-import { Project } from '../models/project';
+import { ProjectService } from '../project/services/project.service';
+import { Project } from '../project/models/project';
 
 @Component({
   selector: 'app-dashboard',

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ProjectService } from 'src/app/services/project.service';
+import { ProjectService } from 'src/app/project/services/project.service';
 import { first } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -18,7 +18,7 @@ export class ProjectCreateComponent implements OnInit {
   
   constructor(private formBuilder: FormBuilder,
     private projectService: ProjectService,
-    public activeModel: NgbActiveModal) { }
+    public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
     this.createForm = this.formBuilder.group({
@@ -41,7 +41,7 @@ export class ProjectCreateComponent implements OnInit {
     this.loading = true;
     this.projectService.create(this.createForm.value).pipe(first()).subscribe(
       data => {
-        this.activeModel.close();
+        this.activeModal.close();
         alert('Project has been created.');
         this.projectCreated.emit();
       },

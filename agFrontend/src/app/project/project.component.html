@@ -13,7 +13,7 @@
         <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
         <ul *ngIf="projects">
             <li *ngFor="let project of projects">{{project.name}} {{project.sprintLength}} <button type="button"
-                    class="btn btn-primary" (click)="projectDetail(project.id)">Open</button></li>
+                    class="btn btn-primary" (click)="getDetail(project.id)">Open</button></li>
         </ul>
     </div>
 </div>
