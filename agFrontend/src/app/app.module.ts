@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './services/authentication/auth-interceptor.service';
@@ -20,12 +19,12 @@ import { ProjectDetailComponent } from './project/project-detail/project-detail.
 import { UserStoryCreateComponent } from './user-story/user-story-create/user-story-create.component';
 import { ProjectBacklogComponent } from './project/project-backlog/project-backlog.component';
 import { EngineeringTaskCreateComponent } from './engineering-task/engineering-task-create/engineering-task-create.component';
+import { EngineeringTaskUpdateComponent } from './engineering-task/engineering-task-update/engineering-task-update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent,
     UserRegisterComponent,
     UserManagerComponent,
     UserUpdateComponent,
@@ -34,7 +33,8 @@ import { EngineeringTaskCreateComponent } from './engineering-task/engineering-t
     ProjectDetailComponent,
     UserStoryCreateComponent,
     ProjectBacklogComponent,
-    EngineeringTaskCreateComponent
+    EngineeringTaskCreateComponent,
+    EngineeringTaskUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +55,8 @@ import { EngineeringTaskCreateComponent } from './engineering-task/engineering-t
     UserUpdateComponent,
     ProjectCreateComponent,
     UserStoryCreateComponent,
-    EngineeringTaskCreateComponent
+    EngineeringTaskCreateComponent,
+    EngineeringTaskUpdateComponent
   ]
 })
 export class AppModule { }

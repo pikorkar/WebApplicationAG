@@ -9,7 +9,7 @@ namespace agBackend.Services
     public interface IUserStoryService
     {
         IEnumerable<UserStoryModel> GetAllBySprint(int id);
-        UserStoryModel Create(UserStoryCreateModel model);
+        UserStoryModel Create(UserStoryModel model);
         IEnumerable<UserStoryModel> GetAllByProject(int id);
     }
 
@@ -27,19 +27,17 @@ namespace agBackend.Services
             return _context.UserStories.Where(x => x.SprintId == id);
         }
 
-        public UserStoryModel Create(UserStoryCreateModel model)
+        public UserStoryModel Create(UserStoryModel model)
         {
             if (_context.Projects.Any(x => x.Name == model.Name))
             {
                 throw new AppException("Name is already taken.");
             }
 
-            UserStoryModel projectModel = new UserStoryModel { Name = model.Name, SprintId = model.SprintId };
-
-            _context.UserStories.Add(projectModel);
+            _context.UserStories.Add(model);
             _context.SaveChanges();
 
-            return projectModel;
+            return model;
         }
 
         public IEnumerable<UserStoryModel> GetAllByProject(int id)

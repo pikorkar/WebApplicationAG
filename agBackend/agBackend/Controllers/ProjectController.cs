@@ -53,6 +53,5 @@ namespace agBackend.Controllers
 
             return Ok(project);
         }
-
     }
 }

@@ -10,6 +10,10 @@ namespace agBackend.Helpers
             CreateMap<User, UserModel>();
             CreateMap<RegisterModel, User>();
             CreateMap<UpdateModel, User>();
+            CreateMap<EngineeringTaskUpdateModel, EngineeringTaskModel>();
+            CreateMap<EngineeringTaskCreateModel, EngineeringTaskModel>();
+            CreateMap<UserStoryCreateModel, UserStoryModel>();
+
         }
     }
 }

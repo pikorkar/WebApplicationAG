@@ -44,9 +44,11 @@ namespace agBackend.Controllers
         [HttpPost("create")]
         public IActionResult Create([FromBody]UserStoryCreateModel model)
         {
+            var userStoryModel = _mapper.Map<UserStoryModel>(model);
+
             try
             {
-                _userStoryService.Create(model);
+                _userStoryService.Create(userStoryModel);
                 return Ok();
             }
             catch (AppException ex)

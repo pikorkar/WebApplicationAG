@@ -42,17 +42,20 @@ export class ProjectBacklogComponent implements OnInit {
     // Get Project - by ID from route
     this.projectService.getById(this.projectId).pipe(first()).subscribe(project => {
       this.project = project;
+
+
+      // Get all User Stories by Project
+      this.userStoryService.getAllByProject(this.projectId).pipe(first()).subscribe(userStories => {
+        this.userStories = userStories;
+        this.loading = false;
+      }, error => {
+        alert(error.message);
+      })
+
     }, error => {
       alert(error.message);
     });
 
-    // Get all User Stories by Project
-    this.userStoryService.getAllByProject(this.projectId).pipe(first()).subscribe(userStories => {
-      this.userStories = userStories;
-      this.loading = false;
-    }, error => {
-      alert(error.message);
-    })
   }
 
 }

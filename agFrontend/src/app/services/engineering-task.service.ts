@@ -14,7 +14,7 @@ export class EngineeringTaskService {
     private authenticationService: AuthenticationService) { }
 
   getAllByUserStory(id: number) {
-    return this.http.get<EngineeringTask>(`${environment.apiUrl}/engineeringtask/userstory/${id}`);
+    return this.http.get<EngineeringTask[]>(`${environment.apiUrl}/engineeringtask/userstory/${id}`);
   }
 
   create(engineeringTask: EngineeringTask) {
@@ -22,5 +22,13 @@ export class EngineeringTaskService {
     engineeringTask.userStoryId = Number(engineeringTask.userStoryId);
     engineeringTask.userId = this.authenticationService.currentUserValue.id;
     return this.http.post(`${environment.apiUrl}/engineeringtask/create`, engineeringTask);
+  }
+
+  update(id: number, engineeringTask: EngineeringTask) {
+    return this.http.put(`${environment.apiUrl}/engineeringtask/${id}`, engineeringTask);
+  }
+
+  getById(id: number) {
+    return this.http.get<EngineeringTask>(`${environment.apiUrl}/engineeringtask/${id}`);
   }
 }

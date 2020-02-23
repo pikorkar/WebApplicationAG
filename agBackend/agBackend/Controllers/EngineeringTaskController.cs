@@ -45,15 +45,45 @@ namespace agBackend.Controllers
         [HttpPost("create")]
         public IActionResult Create([FromBody]EngineeringTaskCreateModel model)
         {
+            var engineeringTask = _mapper.Map<EngineeringTaskModel>(model);
+
             try
             {
-                _engineeringTaskService.Create(model);
+                _engineeringTaskService.Create(engineeringTask);
                 return Ok();
             }
             catch (AppException ex)
             {
                 return BadRequest(new { message = ex.Message });
             }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody]EngineeringTaskUpdateModel model)
+        {
+            var engineeringTaskModel = _mapper.Map<EngineeringTaskModel>(model);
+            engineeringTaskModel.Id = id;
+
+            try
+            {
+                _engineeringTaskService.Update(engineeringTaskModel);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var engineeringTask = _engineeringTaskService.GetById(id);
+
+            if (engineeringTask == null)
+                return NotFound();
+
+            return Ok(engineeringTask);
         }
     }
 }

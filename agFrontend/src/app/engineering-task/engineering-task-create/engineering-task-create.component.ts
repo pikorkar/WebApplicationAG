@@ -27,8 +27,8 @@ export class EngineeringTaskCreateComponent implements OnInit {
     private userStoryService: UserStoryService) { }
 
   ngOnInit() {
-// Start Loading
-this.loading = true;
+    // Start Loading
+    this.loading = true;
 
     // Get all User Stories by Project for userStory select
     this.userStoryService.getAllByProject(this.projectId).pipe(first()).subscribe(userStories => {

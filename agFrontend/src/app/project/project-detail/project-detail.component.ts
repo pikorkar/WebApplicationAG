@@ -12,6 +12,9 @@ import { UserStory } from 'src/app/models/user-story';
 import { ProjectService } from '../services/project.service';
 import { Project } from '../models/project';
 import { EngineeringTaskCreateComponent } from 'src/app/engineering-task/engineering-task-create/engineering-task-create.component';
+import { EngineeringTaskService } from 'src/app/services/engineering-task.service';
+import { EngineeringTask } from 'src/app/models/engineering-task';
+import { EngineeringTaskUpdateComponent } from 'src/app/engineering-task/engineering-task-update/engineering-task-update.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -36,12 +39,15 @@ export class ProjectDetailComponent implements OnInit {
   // User Stories
   userStories: UserStory[];
 
+  engineeringTasks: EngineeringTask[];
+
   constructor(private sprintService: SprintService,
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private userStoryService: UserStoryService,
     private projectService: ProjectService,
-    private router: Router) { }
+    private router: Router,
+    private engineeringTaskService: EngineeringTaskService) { }
 
   ngOnInit() {
     // start loading
@@ -127,11 +133,31 @@ export class ProjectDetailComponent implements OnInit {
     const modalRef = this.modalService.open(EngineeringTaskCreateComponent);
     modalRef.componentInstance.projectId = this.projectId;
     modalRef.componentInstance["engineeringTaskCreated"].subscribe(event => {
-      // this.getAllUserStoriesBySprintId(this.activeSprint.id);
+      location.reload(true);
     });
   }
 
-  getAllEngineeringTasksByUserStory() {
+  openUserStory(userStory: UserStory) {
+    userStory.expanded = !userStory.expanded;
+    if (userStory.expanded) {
+      this.getAllEngineeringTasksByUserStory(userStory);
+    }
+  }
 
+  getAllEngineeringTasksByUserStory(userStory: UserStory) {
+    this.engineeringTaskService.getAllByUserStory(userStory.id).pipe(first()).subscribe(engineeringTasks => {
+      userStory.engineeringTasks = engineeringTasks;
+    }, error => {
+      alert(error.message);
+    });
+  }
+
+  updateEngineeringTask(id: number) {
+    const modalRef = this.modalService.open(EngineeringTaskUpdateComponent);
+    modalRef.componentInstance.projectId = this.projectId;
+    modalRef.componentInstance.engineeringTaskId = id;
+    modalRef.componentInstance["engineeringTaskUpdated"].subscribe(event => {
+      // location.reload(true);
+    });
   }
 }

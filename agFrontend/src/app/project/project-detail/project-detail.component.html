@@ -21,10 +21,18 @@
         <button type="button" class="btn btn-primary" (click)="createUserStory()">New User Story</button>
         <ul *ngIf="this.userStories" class="list-group">
             <li *ngFor="let userStory of userStories" class="list-group-item">
-                <h3>{{userStory.name}}</h3>
+                <h3 (click)="openUserStory(userStory)">{{userStory.name}}</h3>
                 <div class="progress">
                     <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50"
                         aria-valuemin="0" aria-valuemax="100">50%</div>
+                </div>
+
+                <div *ngIf="userStory.expanded">
+                    <ul>
+                        <li *ngFor="let engineeringTask of userStory.engineeringTasks"  (click)="updateEngineeringTask(engineeringTask.id)">
+                            {{engineeringTask.name}}
+                        </li>
+                    </ul>
                 </div>
             </li>
         </ul>
