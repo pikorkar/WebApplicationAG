@@ -42,5 +42,18 @@ namespace agBackend.Controllers
             return Ok(model);
         }
 
+        [HttpPost("create")]
+        public IActionResult Create([FromBody]EngineeringTaskCreateModel model)
+        {
+            try
+            {
+                _engineeringTaskService.Create(model);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace agBackend.Services
     {
         IEnumerable<ProjectModel> GetAll();
         ProjectModel Create(ProjectCreateModel model);
+        ProjectModel GetById(int id);
     }
 
     public class ProjectService : IProjectService
@@ -53,6 +54,11 @@ namespace agBackend.Services
                 tmpStartDate = tmpStartDate.AddDays(model.SprintLength);
             }
             _context.SaveChanges();
+        }
+
+        public ProjectModel GetById(int id)
+        {
+            return _context.Projects.Find(id);
         }
     }
    

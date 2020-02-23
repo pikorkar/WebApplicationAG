@@ -18,6 +18,8 @@ import { ProjectComponent } from './project/project.component';
 import { ProjectCreateComponent } from './project/project-create/project-create.component';
 import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
 import { UserStoryCreateComponent } from './user-story/user-story-create/user-story-create.component';
+import { ProjectBacklogComponent } from './project/project-backlog/project-backlog.component';
+import { EngineeringTaskCreateComponent } from './engineering-task/engineering-task-create/engineering-task-create.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { UserStoryCreateComponent } from './user-story/user-story-create/user-st
     ProjectComponent,
     ProjectCreateComponent,
     ProjectDetailComponent,
-    UserStoryCreateComponent
+    UserStoryCreateComponent,
+    ProjectBacklogComponent,
+    EngineeringTaskCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,8 @@ import { UserStoryCreateComponent } from './user-story/user-story-create/user-st
   entryComponents: [
     UserUpdateComponent,
     ProjectCreateComponent,
-    UserStoryCreateComponent
+    UserStoryCreateComponent,
+    EngineeringTaskCreateComponent
   ]
 })
 export class AppModule { }

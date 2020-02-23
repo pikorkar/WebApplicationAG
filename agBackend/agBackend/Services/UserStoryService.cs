@@ -2,7 +2,6 @@
 using agBackend.Models;
 using System;
 using System.Linq;
-using agBackend.Entities;
 using agBackend.Helpers;
 
 namespace agBackend.Services
@@ -11,6 +10,7 @@ namespace agBackend.Services
     {
         IEnumerable<UserStoryModel> GetAllBySprint(int id);
         UserStoryModel Create(UserStoryCreateModel model);
+        IEnumerable<UserStoryModel> GetAllByProject(int id);
     }
 
     public class UserStoryService : IUserStoryService
@@ -40,6 +40,13 @@ namespace agBackend.Services
             _context.SaveChanges();
 
             return projectModel;
+        }
+
+        public IEnumerable<UserStoryModel> GetAllByProject(int id)
+        {
+            int[] sprintIdsArray = _context.Sprints.Where(x => x.ProjectId == id).Select(x => x.Id).ToArray();
+
+            return _context.UserStories.Where(x => sprintIdsArray.Contains(x.SprintId));
         }
     }
 }

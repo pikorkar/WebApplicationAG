@@ -18,4 +18,8 @@ export class UserStoryService {
     userStory.sprintId = sprintId;
     return this.http.post(`${environment.apiUrl}/userstory/create`, userStory);
   }
+
+  getAllByProject(id: number) {
+    return this.http.get<UserStory[]>(`${environment.apiUrl}/userstory/project/${id}`);
+  }
 }

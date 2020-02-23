@@ -1,0 +1,19 @@
+<div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+
+<div *ngIf="!loading">
+    <h1 class="mt-4">{{project.name}} backlog</h1>
+    <div *ngIf="!userStories" class="alert alert-danger" role="alert">
+        No data has been found.
+    </div>
+    <div class="card mt-4">
+        <div class="card-header">
+            <h4>All User Stories</h4>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="createUserStory()">New User Story???</button>
+        <ul *ngIf="userStories" class="list-group">
+            <li *ngFor="let userStory of userStories" class="list-group-item">
+                <h3>{{userStory.name}}</h3>
+            </li>
+        </ul>
+    </div>
+</div>

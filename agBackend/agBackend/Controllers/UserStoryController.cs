@@ -55,5 +55,16 @@ namespace agBackend.Controllers
             }
         }
 
+        [HttpGet("project/{id}")]
+        public IActionResult GetAllByProject(int id)
+        {
+            var model = _userStoryService.GetAllByProject(id);
+
+            if (model == null)
+                return NotFound();
+
+            return Ok(model);
+        }
+
     }
 }

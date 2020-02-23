@@ -8,6 +8,7 @@ import { UserRegisterComponent } from './users/user-register/user-register.compo
 import { UserManagerComponent } from './users/user-manager/user-manager.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
+import { ProjectBacklogComponent } from './project/project-backlog/project-backlog.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'userManager', component: UserManagerComponent, canActivate: [AuthGuardService], data: { roles: [Role.Admin] } },
   { path: 'projects', component: ProjectComponent, canActivate: [AuthGuardService] },
   { path: 'projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuardService] },
+  { path: 'projects/:id/backlog', component: ProjectBacklogComponent, canActivate: [AuthGuardService] },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

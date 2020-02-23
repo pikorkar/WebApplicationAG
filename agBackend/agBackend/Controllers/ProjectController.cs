@@ -43,5 +43,16 @@ namespace agBackend.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var project = _projectService.GetById(id);
+
+            if (project == null)
+                return NotFound();
+
+            return Ok(project);
+        }
+
     }
 }
