@@ -21,10 +21,13 @@ export class EngineeringTaskService {
     engineeringTask.status = Status.New;
     engineeringTask.userStoryId = Number(engineeringTask.userStoryId);
     engineeringTask.userId = this.authenticationService.currentUserValue.id;
+    engineeringTask.doneHours = 0;
     return this.http.post(`${environment.apiUrl}/engineeringtask/create`, engineeringTask);
   }
 
   update(id: number, engineeringTask: EngineeringTask) {
+    engineeringTask.userStoryId = Number(engineeringTask.userStoryId);
+    engineeringTask.userId = Number(engineeringTask.userId);
     return this.http.put(`${environment.apiUrl}/engineeringtask/${id}`, engineeringTask);
   }
 

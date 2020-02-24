@@ -56,6 +56,14 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="doneHours">Done Hours</label>
+            <input type="number" formControlName="doneHours" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.doneHours.errors }" />
+            <div *ngIf="submitted && f.doneHours.errors" class="invalid-feedback">
+                <div *ngIf="f.doneHours.errors.required">Done Hours is required</div>
+            </div>
+        </div>
+        <div class="form-group">
             <label for="priority">Priority</label>
             <input type="number" formControlName="priority" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.priority.errors }" />

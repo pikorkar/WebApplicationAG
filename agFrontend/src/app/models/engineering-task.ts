@@ -8,4 +8,5 @@ export class EngineeringTask {
     estimatedHours: number;
     priority: number;  
     userId: number;
+    doneHours: number;
 }

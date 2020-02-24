@@ -6,4 +6,6 @@ export class UserStory {
     sprintId: number;
     expanded: boolean = false;
     engineeringTasks: EngineeringTask[];
+    donePercent: number;
+    hoursRemaining: number;
 }

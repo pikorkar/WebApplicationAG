@@ -20,5 +20,6 @@ namespace agBackend.Models
         public int EstimatedHours { get; set; }
 
         public int Priority { get; set; }
+        public int DoneHours { get; set; }
     }
 }

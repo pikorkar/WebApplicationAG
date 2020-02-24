@@ -9,6 +9,7 @@ import { UserService } from 'src/app/users/services/user.service';
 import { first } from 'rxjs/operators';
 import { Status } from 'src/app/models/status';
 import { EngineeringTask } from 'src/app/models/engineering-task';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-engineering-task-update',
@@ -44,32 +45,28 @@ export class EngineeringTaskUpdateComponent implements OnInit {
     // Start Loading
     this.loading = true;
 
-    // Get all User Stories by Project for userStory select
-    this.userStoryService.getAllByProject(this.projectId).pipe(first()).subscribe(userStories => {
+    forkJoin([this.userStoryService.getAllByProject(this.projectId),
+    this.userService.getAll(),
+    this.engineeringTaskService.getById(this.engineeringTaskId)
+    ]).subscribe(([userStories, users, engineeringTask]) => {
       this.userStories = userStories;
+      this.users = users;
 
-      this.userService.getAll().pipe(first()).subscribe(users => {
-        this.users = users;
-
-        this.engineeringTaskService.getById(this.engineeringTaskId).pipe(first()).subscribe(engineeringTask => {
-
-          this.updateForm = this.formBuilder.group({
-            name: [engineeringTask.name, Validators.required],
-            userId: [engineeringTask.userId, Validators.required],
-            userStoryId: [engineeringTask.userStoryId, Validators.required],
-            status: [engineeringTask.status, Validators.required],
-            estimatedHours: [engineeringTask.estimatedHours, Validators.required],
-            priority: [engineeringTask.priority, Validators.required]
-          });
-          this.loading = false;
-        });
-
+      this.updateForm = this.formBuilder.group({
+        name: [engineeringTask.name, Validators.required],
+        userId: [engineeringTask.userId, Validators.required],
+        userStoryId: [engineeringTask.userStoryId, Validators.required],
+        status: [engineeringTask.status, Validators.required],
+        estimatedHours: [engineeringTask.estimatedHours, Validators.required],
+        doneHours: [engineeringTask.doneHours, Validators.required],
+        priority: [engineeringTask.priority, Validators.required]
       });
+
+      this.loading = false;
     }, error => {
       alert(error.message);
       this.loading = false;
-
-    })
+    });
   }
 
   get f() { return this.updateForm.controls; }

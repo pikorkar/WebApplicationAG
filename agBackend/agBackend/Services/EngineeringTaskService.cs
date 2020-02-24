@@ -70,6 +70,9 @@ namespace agBackend.Services
             if (engineeringTaskParam.Priority > 0)
                 engineeringTask.Priority = engineeringTaskParam.Priority;
 
+            if (engineeringTaskParam.DoneHours > 0)
+                engineeringTask.DoneHours = engineeringTaskParam.DoneHours;
+
             _context.EngineeringTasks.Update(engineeringTask);
             _context.SaveChanges();
         }

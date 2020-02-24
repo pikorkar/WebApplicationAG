@@ -1,0 +1,15 @@
+.project-detail {
+    &_user-story {
+        cursor: pointer;
+        &:hover {
+            color: blue;
+        }
+    }
+
+    &_sprint {
+        cursor: pointer;
+        &:hover {
+            color: blue;
+        }
+    }
+}
