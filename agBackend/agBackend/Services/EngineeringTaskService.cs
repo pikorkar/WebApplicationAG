@@ -33,7 +33,8 @@ namespace agBackend.Services
             {
                 throw new AppException("Name is already taken.");
             }
-            
+
+            model.DoneHours = 0;
             _context.EngineeringTasks.Add(model);
             _context.SaveChanges();
 

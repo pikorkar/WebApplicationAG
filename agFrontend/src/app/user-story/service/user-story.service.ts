@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { UserStory } from '../models/user-story';
+import { UserStory } from '../model/user-story';
 
 @Injectable({
   providedIn: 'root'

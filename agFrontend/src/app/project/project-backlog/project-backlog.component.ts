@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Project } from '../models/project';
-import { UserStory } from 'src/app/models/user-story';
+import { UserStory } from 'src/app/user-story/model/user-story';
 import { ActivatedRoute } from '@angular/router';
-import { UserStoryService } from 'src/app/services/user-story.service';
-import { ProjectService } from '../services/project.service';
+import { UserStoryService } from 'src/app/user-story/service/user-story.service';
+import { ProjectService } from '../service/project.service';
 import { first } from 'rxjs/operators';
 
 @Component({

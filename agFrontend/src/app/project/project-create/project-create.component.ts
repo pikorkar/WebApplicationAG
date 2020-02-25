@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ProjectService } from 'src/app/project/services/project.service';
+import { ProjectService } from 'src/app/project/service/project.service';
 import { first } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 

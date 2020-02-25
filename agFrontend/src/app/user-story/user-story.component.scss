@@ -1,0 +1,10 @@
+.user-story {
+    &_main {
+        cursor: pointer;
+        &:hover {
+            h3 {
+                color: blue;
+            }
+        }
+    }
+}

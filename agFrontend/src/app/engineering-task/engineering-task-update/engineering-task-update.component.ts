@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserStory } from 'src/app/models/user-story';
+import { UserStory } from 'src/app/user-story/model/user-story';
 import { User } from 'src/app/users/models/user';
-import { EngineeringTaskService } from 'src/app/services/engineering-task.service';
+import { EngineeringTaskService } from 'src/app/engineering-task/service/engineering-task.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserStoryService } from 'src/app/services/user-story.service';
+import { UserStoryService } from 'src/app/user-story/service/user-story.service';
 import { UserService } from 'src/app/users/services/user.service';
 import { first } from 'rxjs/operators';
-import { Status } from 'src/app/models/status';
-import { EngineeringTask } from 'src/app/models/engineering-task';
+import { Status } from 'src/app/engineering-task/model/status';
+import { EngineeringTask } from 'src/app/engineering-task/model/engineering-task';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -51,7 +51,7 @@ export class EngineeringTaskUpdateComponent implements OnInit {
     ]).subscribe(([userStories, users, engineeringTask]) => {
       this.userStories = userStories;
       this.users = users;
-
+      
       this.updateForm = this.formBuilder.group({
         name: [engineeringTask.name, Validators.required],
         userId: [engineeringTask.userId, Validators.required],
@@ -59,7 +59,8 @@ export class EngineeringTaskUpdateComponent implements OnInit {
         status: [engineeringTask.status, Validators.required],
         estimatedHours: [engineeringTask.estimatedHours, Validators.required],
         doneHours: [engineeringTask.doneHours, Validators.required],
-        priority: [engineeringTask.priority, Validators.required]
+        priority: [engineeringTask.priority, Validators.required],
+        description: [engineeringTask.description, Validators.required]
       });
 
       this.loading = false;

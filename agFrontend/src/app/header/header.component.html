@@ -1,0 +1,20 @@
+<div class="header">
+    <nav aria-label="breadcrumb">
+        <ol class="header_breadcrumb breadcrumb">
+            <li class="header_breadcrumb-item breadcrumb-item"><a (click)="location.back()">projects</a></li>
+            <li class="breadcrumb-item active" aria-current="page">project detail</li>
+        </ol>
+    </nav>
+    <h1 class="mt-4">{{ projectName }}
+        <div class="header_buttons">
+            <button type="button" class="header_button-item btn btn-primary" (click)="goToBacklog()">Project
+                Backlog</button>
+
+            <button type="button" class="header_button-item btn btn-primary" (click)="createEngineeringTask()">New
+                engineering
+                Task</button>
+            <button type="button" class="header_button-item btn btn-primary" (click)="createUserStory()">New User
+                Story</button>
+        </div>
+    </h1>
+</div>

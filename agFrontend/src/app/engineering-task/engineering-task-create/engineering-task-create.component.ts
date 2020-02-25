@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { EngineeringTaskService } from 'src/app/services/engineering-task.service';
+import { EngineeringTaskService } from 'src/app/engineering-task/service/engineering-task.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { first } from 'rxjs/operators';
-import { UserStory } from 'src/app/models/user-story';
-import { UserStoryService } from 'src/app/services/user-story.service';
+import { UserStory } from 'src/app/user-story/model/user-story';
+import { UserStoryService } from 'src/app/user-story/service/user-story.service';
 
 @Component({
   selector: 'app-engineering-task-create',
@@ -38,13 +38,14 @@ export class EngineeringTaskCreateComponent implements OnInit {
         name: ['', Validators.required],
         userStoryId: ['', Validators.required],
         estimatedHours: ['', Validators.required],
-        priority: ['', Validators.required]
+        priority: ['', Validators.required],
+        description: ['', Validators.required]
       });
 
       this.loading = false;
 
     }, error => {
-      alert(error.message);
+      alert(error);
       this.loading = false;
 
     })
@@ -68,7 +69,7 @@ export class EngineeringTaskCreateComponent implements OnInit {
       },
       error => {
         this.submittedLoading = false;
-        alert(error.message);
+        alert(error);
       }
     )
   }

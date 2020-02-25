@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { EngineeringTask } from '../models/engineering-task';
-import { Status } from '../models/status';
-import { AuthenticationService } from './authentication/authentication.service';
+import { EngineeringTask } from '../model/engineering-task';
+import { Status } from '../model/status';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,6 @@ export class EngineeringTaskService {
     engineeringTask.status = Status.New;
     engineeringTask.userStoryId = Number(engineeringTask.userStoryId);
     engineeringTask.userId = this.authenticationService.currentUserValue.id;
-    engineeringTask.doneHours = 0;
     return this.http.post(`${environment.apiUrl}/engineeringtask/create`, engineeringTask);
   }
 

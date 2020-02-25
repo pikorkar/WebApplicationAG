@@ -25,5 +25,8 @@ namespace agBackend.Models
 
         [Required]
         public int Priority { get; set; }
+
+        [Required]
+        public string Description { get; set; }
     }
 }

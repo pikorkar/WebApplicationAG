@@ -1,0 +1,12 @@
+.project {
+    &_buttons {
+        float: right;
+    }
+    &_item {
+        color: lightseagreen;
+        &:hover {
+            color: blue;
+            cursor: pointer;
+        }
+    } 
+}

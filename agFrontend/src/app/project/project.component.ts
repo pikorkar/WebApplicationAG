@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from './models/project';
-import { ProjectService } from './services/project.service';
+import { ProjectService } from './service/project.service';
 import { first } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectCreateComponent } from './project-create/project-create.component';

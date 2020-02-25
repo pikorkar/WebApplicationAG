@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserStoryService } from 'src/app/services/user-story.service';
+import { UserStoryService } from 'src/app/user-story/service/user-story.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { first } from 'rxjs/operators';
 

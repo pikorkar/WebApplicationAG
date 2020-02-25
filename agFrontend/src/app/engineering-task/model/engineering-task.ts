@@ -9,4 +9,5 @@ export class EngineeringTask {
     priority: number;  
     userId: number;
     doneHours: number;
+    description: string;
 }

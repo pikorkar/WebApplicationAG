@@ -1,10 +1,9 @@
-import { EngineeringTask } from './engineering-task';
+import { EngineeringTask } from '../../engineering-task/model/engineering-task';
 
 export class UserStory {
     id: number;
     name: string;
     sprintId: number;
-    expanded: boolean = false;
     engineeringTasks: EngineeringTask[];
     donePercent: number;
     hoursRemaining: number;

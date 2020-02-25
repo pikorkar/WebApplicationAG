@@ -2,17 +2,12 @@
     <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
 
     <div *ngIf="!loading">
-        <a (click)="location.back()"><Back</a>
-        <h1 class="mt-4">{{project.name}}
-            <button type="button" class="btn btn-primary" (click)="createEngineeringTask()">New engineering
-                Task</button>
-            <button type="button" class="btn btn-primary" (click)="createUserStory()">New User Story</button>
-        </h1>
-        <button type="button" class="btn btn-primary" (click)="goToBacklog()">Project Backlog</button>
+        <app-header
+            [activeSprintId]="activeSprint.id">
+        </app-header>
         <div *ngIf="this.sprints.length <= 0" class="alert alert-danger" role="alert">
             No data has been found.
         </div>
-        <!-- <button type="button" class="btn btn-primary" (click)="create()">+ create</button> -->
         <div *ngIf="this.sprints.length > 0" class="card mt-4">
             <div class="card-header">
                 <h4>Sprints</h4>
@@ -26,21 +21,9 @@
             </div>
             <ul *ngIf="this.userStories" class="list-group">
                 <li *ngFor="let userStory of userStories" class="list-group-item">
-                    <h3 class="project-detail_user-story" (click)="openUserStory(userStory)">{{userStory.name}}</h3>
-                    Remaining hours: {{userStory.hoursRemaining}}
-                    <div class="progress">
-                        <div class="progress-bar bg-info" role="progressbar" [style.width.%]="userStory.donePercent"
-                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">{{ userStory.donePercent }}% done</div>
-                    </div>
-
-                    <div *ngIf="userStory.expanded">
-                        <ul>
-                            <li *ngFor="let engineeringTask of userStory.engineeringTasks"
-                                (click)="updateEngineeringTask(engineeringTask.id)">
-                                {{engineeringTask.name}}
-                            </li>
-                        </ul>
-                    </div>
+                    <app-user-story
+                        [userStory]="userStory">
+                    </app-user-story>
                 </li>
             </ul>
         </div>
