@@ -6,8 +6,10 @@
             <li class="list-group-item" *ngFor="let user of users; let i = index">
                 {{ user.firstName }} {{ user.lastName }}, {{ user.username }}
                 <div class="user-manager_buttons">
-                    <button type="button" class="btn btn-primary user-manager_button-item" (click)="updateUser(user.id)">Update</button>
-                    <button type="button" class="btn btn-danger user-manager_button-item" (click)="deletUser(user.id)">Delete</button>
+                    <button [disabled]="authenticationService.currentUserValue.id != user.id" type="button"
+                        class="btn btn-danger user-manager_button-item" (click)="deletUser(user.id)">Delete</button>
+                    <button type="button" class="btn btn-primary user-manager_button-item"
+                        (click)="updateUser(user.id)">Update</button>
                 </div>
             </li>
         </ul>

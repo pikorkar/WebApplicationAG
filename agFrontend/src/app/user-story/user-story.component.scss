@@ -7,4 +7,10 @@
             }
         }
     }
+    &_engineering-task {
+        cursor: pointer;
+        &:hover {
+            color: blue;
+        }
+    }
 }

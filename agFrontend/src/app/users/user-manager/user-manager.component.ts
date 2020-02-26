@@ -4,6 +4,7 @@ import { UserService } from '../services/user.service';
 import { first } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserUpdateComponent } from '../user-update/user-update.component';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-user-manager',
@@ -15,7 +16,8 @@ export class UserManagerComponent implements OnInit {
   users: User[];
 
   constructor(private userService: UserService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.getAllUsers();
@@ -26,11 +28,10 @@ export class UserManagerComponent implements OnInit {
     this.userService.getAll().pipe(first()).subscribe(users => {
       this.loading = false;
       this.users = users;
-      
     },
-      error => {
-        alert(error.message);
-      });
+    error => {
+        alert(error);
+    });
   }
 
   updateUser(id: number) {
@@ -43,9 +44,9 @@ export class UserManagerComponent implements OnInit {
       this.userService.delete(id).subscribe(() => {
         this.getAllUsers();
       }, error => {
-        alert(error.message);
+        alert(error);
       });
     }
   }
- 
+
 }

@@ -5,9 +5,6 @@
         <app-header
             [activeSprintId]="activeSprint.id">
         </app-header>
-        <div *ngIf="this.sprints.length <= 0" class="alert alert-danger" role="alert">
-            No data has been found.
-        </div>
         <div *ngIf="this.sprints.length > 0" class="card mt-4">
             <div class="card-header">
                 <h4>Sprints</h4>

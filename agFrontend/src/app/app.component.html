@@ -5,11 +5,18 @@
       <a class="nav-item nav-link" routerLink="/">Projects</a>
       <a *ngIf="this.isAdmin" class="nav-item nav-link" routerLink="/userManager">Manage users</a>
     </div>
-    <ul class="nav navbar-nav navbar-right">
+    <div class="d-flex justify-content-center">
+      <span class="navbar-brand">{{ currentUser.username }}</span>
+    </div>
+    <div class="nav navbar-nav navbar-right">
+      <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+
+    <!-- <ul class="nav navbar-nav navbar-right">
       <li class="nav-item dropdown" dropdown>
         <a dropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" type="button"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{this.currentUser.firstName}} {{this.currentUser.lastName}}
+          {{ currentUser.firstName }} {{currentUser.lastName}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: 50px;">
           <a class="dropdown-item">Action</a>
@@ -18,7 +25,7 @@
           <a class="dropdown-item" (click)="logout()">Logout</a>
         </div>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </nav>
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Project } from '../models/project';
 import { UserStory } from 'src/app/user-story/model/user-story';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserStoryService } from 'src/app/user-story/service/user-story.service';
 import { ProjectService } from '../service/project.service';
 import { first } from 'rxjs/operators';
@@ -28,7 +28,8 @@ export class ProjectBacklogComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private userStoryService: UserStoryService,
-    private projectService: ProjectService, ) { }
+    private projectService: ProjectService, 
+    private router: Router) { }
 
   ngOnInit() {
     // start loading
