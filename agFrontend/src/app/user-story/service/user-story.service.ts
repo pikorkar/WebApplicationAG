@@ -26,4 +26,13 @@ export class UserStoryService {
   delete(id: number) {
     return this.http.delete(`${environment.apiUrl}/userstory/${id}`);
   }
+
+  update(id: number, userStory: UserStory) {
+    userStory.sprintId = Number(userStory.sprintId);
+    return this.http.put(`${environment.apiUrl}/userstory/${id}`, userStory);
+  }
+
+  getById(id: number) {
+    return this.http.get<UserStory>(`${environment.apiUrl}/userstory/${id}`);
+  }
 }

@@ -2,8 +2,12 @@
     <div class="user-story_main">
         <h3>
             <span (click)="expand(userStory)">{{userStory.name}}</span>
-            <button type="button" class="btn btn-danger user-story_button-item"
-                (click)="delete(userStory.id)">Delete</button>
+            <div class="user-story_buttons">
+                <button type="button" class="btn btn-primary user-story_button-item"
+                    (click)="update(userStory.id)">Update</button>
+                <button type="button" class="btn btn-danger user-story_button-item"
+                    (click)="delete(userStory.id)">Delete</button>
+            </div>
         </h3>
         Remaining hours: {{userStory.hoursRemaining}}
         <div class="progress">

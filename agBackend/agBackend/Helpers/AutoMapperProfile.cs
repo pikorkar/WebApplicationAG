@@ -13,7 +13,7 @@ namespace agBackend.Helpers
             CreateMap<EngineeringTaskUpdateModel, EngineeringTaskModel>();
             CreateMap<EngineeringTaskCreateModel, EngineeringTaskModel>();
             CreateMap<UserStoryCreateModel, UserStoryModel>();
-
+            CreateMap<UserStoryUpdateModel, UserStoryModel>();
         }
     }
 }

@@ -1,0 +1,43 @@
+<div class="container">
+    <!-- HEADER -->
+    <div class="modal-header">
+        <h4 class="modal-title">User Story</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- BODY -->
+    <div *ngIf="!loading" class="modal-body">
+        <!-- form -->
+        <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label for="name">Name</label>
+                    <input type="text" formControlName="name" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label for="sprintId">Sprint</label>
+                    <select formControlName="sprintId" class="form-control" id="sprintId"
+                        [ngClass]="{ 'is-invalid': submitted && f.sprintId.errors }">
+                        <option [value]="sprint.id" *ngFor="let sprint of sprints; let i = index">{{ i + 1 }}</option>
+                    </select>
+                    <div *ngIf="submitted && f.sprintId.errors" class="invalid-feedback">
+                        <div *ngIf="f.sprintId.errors.required">Sprint is required</div>
+                    </div>
+                </div>
+            </div>
+            <!-- FOOTER inside form-->
+            <div class="form-group">
+                <button [disabled]="submittedLoading" class="btn btn-primary">
+                    <span *ngIf="submittedLoading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Save
+                </button>
+                <button type="button" class="btn btn-link" (click)="activeModal.close('Close click')">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

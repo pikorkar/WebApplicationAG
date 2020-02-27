@@ -7,7 +7,10 @@
             }
         }
     }
-    &_button-item {
+    &_buttons {
         float: right;
+    }
+    &_button-item {
+        margin-left: 10px;
     }
 }

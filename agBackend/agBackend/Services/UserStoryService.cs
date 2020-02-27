@@ -12,7 +12,10 @@ namespace agBackend.Services
         UserStoryModel Create(UserStoryModel model);
         IEnumerable<UserStoryModel> GetAllByProject(int id);
         void Delete(int id);
+        void Update(UserStoryModel userStoryParam);
+        UserStoryModel GetById(int id);
     }
+
 
     public class UserStoryService : IUserStoryService
     {
@@ -68,6 +71,33 @@ namespace agBackend.Services
 
         private IEnumerable<EngineeringTaskModel> GetEnginneringTasks(int id) {
             return _context.EngineeringTasks.Where(x => x.UserStoryId == id).ToList();
+        }
+
+        public void Update(UserStoryModel userStoryParam)
+        {
+            var userStory = _context.UserStories.Find(userStoryParam.Id);
+
+            if (userStory == null)
+                throw new AppException("User Story not found.");
+
+            if (!string.IsNullOrWhiteSpace(userStoryParam.Name) && userStoryParam.Name != userStory.Name)
+            {
+                if (_context.UserStories.Any(x => x.Name == userStoryParam.Name))
+                    throw new AppException("Name \"" + userStory.Name + "\" is already taken.");
+
+                userStory.Name = userStoryParam.Name;
+            }
+
+            if (userStoryParam.SprintId > 0)
+                userStory.SprintId = userStoryParam.SprintId;
+
+            _context.UserStories.Update(userStory);
+            _context.SaveChanges();
+        }
+
+        public UserStoryModel GetById(int id)
+        {
+            return _context.UserStories.Find(id);
         }
     }
 }

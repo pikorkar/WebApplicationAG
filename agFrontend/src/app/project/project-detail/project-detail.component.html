@@ -19,7 +19,8 @@
             <ul *ngIf="this.userStories" class="list-group">
                 <li *ngFor="let userStory of userStories" class="list-group-item">
                     <app-user-story
-                        [userStory]="userStory">
+                        [userStory]="userStory"
+                        [projectId]="projectId">
                     </app-user-story>
                 </li>
             </ul>

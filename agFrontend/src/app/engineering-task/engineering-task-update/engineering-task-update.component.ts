@@ -63,9 +63,10 @@ export class EngineeringTaskUpdateComponent implements OnInit {
         description: [engineeringTask.description, Validators.required]
       });
 
+      // Stop loading
       this.loading = false;
     }, error => {
-      alert(error.message);
+      alert(error);
       this.loading = false;
     });
   }
@@ -88,7 +89,7 @@ export class EngineeringTaskUpdateComponent implements OnInit {
       },
       error => {
         this.submittedLoading = false;
-        alert(error.message);
+        alert(error);
       }
     )
   }

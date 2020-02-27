@@ -3,6 +3,8 @@ import { UserStory } from './model/user-story';
 import { first } from 'rxjs/operators';
 import { EngineeringTaskService } from '../engineering-task/service/engineering-task.service';
 import { UserStoryService } from './service/user-story.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserStoryUpdateComponent } from './user-story-update/user-story-update.component';
 
 @Component({
   selector: 'app-user-story',
@@ -13,9 +15,11 @@ export class UserStoryComponent implements OnInit {
   public isExpanded: boolean = false;
 
   @Input() userStory: UserStory;
+  @Input() projectId: number = null;
 
   constructor(private engineeringTaskService: EngineeringTaskService,
-    private userStoryService: UserStoryService) { }
+    private userStoryService: UserStoryService,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     this.getEngineeringTasks(this.userStory);
@@ -50,6 +54,15 @@ export class UserStoryComponent implements OnInit {
         alert(error);
       });
     }
+  }
+
+  update(id: number) {
+    const modalRef = this.modalService.open(UserStoryUpdateComponent);
+    modalRef.componentInstance.userStoryId = id;
+    modalRef.componentInstance.projectId = this.projectId;
+    modalRef.componentInstance["userStoryUpdated"].subscribe(event => {
+      // TODO emit value -- this.getAllUserStoriesBySprintId(this.activeSprint.id);
+    });
   }
 
 }

@@ -23,6 +23,7 @@ import { EngineeringTaskUpdateComponent } from './engineering-task/engineering-t
 import { UserStoryComponent } from './user-story/user-story.component';
 import { EngineeringTaskComponent } from './engineering-task/engineering-task.component';
 import { HeaderComponent } from './header/header.component';
+import { UserStoryUpdateComponent } from './user-story/user-story-update/user-story-update.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { HeaderComponent } from './header/header.component';
     EngineeringTaskUpdateComponent,
     UserStoryComponent,
     EngineeringTaskComponent,
-    HeaderComponent
+    HeaderComponent,
+    UserStoryUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ import { HeaderComponent } from './header/header.component';
     ProjectCreateComponent,
     UserStoryCreateComponent,
     EngineeringTaskCreateComponent,
-    EngineeringTaskUpdateComponent
+    EngineeringTaskUpdateComponent,
+    UserStoryUpdateComponent
   ]
 })
 export class AppModule { }

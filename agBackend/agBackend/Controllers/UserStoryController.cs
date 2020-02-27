@@ -76,5 +76,33 @@ namespace agBackend.Controllers
             return Ok();
         }
 
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody]UserStoryUpdateModel model)
+        {
+            var userStoryModel = _mapper.Map<UserStoryModel>(model);
+            userStoryModel.Id = id;
+
+            try
+            {
+                _userStoryService.Update(userStoryModel);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var userStory = _userStoryService.GetById(id);
+
+            if (userStory == null)
+                return NotFound();
+
+            return Ok(userStory);
+        }
+
     }
 }

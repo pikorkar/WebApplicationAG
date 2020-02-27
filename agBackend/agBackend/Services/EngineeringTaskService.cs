@@ -49,7 +49,7 @@ namespace agBackend.Services
             if (engineeringTask == null)
                 throw new AppException("Engineering task not found.");
 
-            if (!string.IsNullOrWhiteSpace(engineeringTask.Name) && engineeringTaskParam.Name != engineeringTask.Name)
+            if (!string.IsNullOrWhiteSpace(engineeringTaskParam.Name) && engineeringTaskParam.Name != engineeringTask.Name)
             {
                 if (_context.EngineeringTasks.Any(x => x.Name == engineeringTaskParam.Name))
                     throw new AppException("Name " + engineeringTask.Name + "is already taken.");
