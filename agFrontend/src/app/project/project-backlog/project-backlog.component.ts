@@ -1,25 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Project } from '../models/project';
 import { UserStory } from 'src/app/user-story/model/user-story';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserStoryService } from 'src/app/user-story/service/user-story.service';
 import { ProjectService } from '../service/project.service';
 import { first } from 'rxjs/operators';
+import { Location } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-project-backlog',
   templateUrl: './project-backlog.component.html',
   styleUrls: ['./project-backlog.component.scss']
 })
-export class ProjectBacklogComponent implements OnInit {
-  // To get project ID
-  private routeSub: Subscription;
-
+export class ProjectBacklogComponent implements OnInit, OnDestroy {
   // Loading
   loading: boolean = false;
 
   // Project
+  private routeSub: Subscription;
   projectId: number;
   project: Project;
 
@@ -29,7 +28,8 @@ export class ProjectBacklogComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private userStoryService: UserStoryService,
     private projectService: ProjectService, 
-    private router: Router) { }
+    private router: Router,
+    private location: Location) { }
 
   ngOnInit() {
     // start loading
@@ -57,6 +57,10 @@ export class ProjectBacklogComponent implements OnInit {
       alert(error.message);
     });
 
+  }
+
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
   }
 
 }

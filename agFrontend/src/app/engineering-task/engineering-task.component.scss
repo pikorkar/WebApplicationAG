@@ -1,0 +1,11 @@
+.engineering-task {
+    &_button-item {
+        float: right;
+    }
+    &_name {
+        cursor: pointer;
+        &:hover {
+            color: blue;
+        }
+    }
+}

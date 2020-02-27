@@ -22,4 +22,8 @@ export class UserStoryService {
   getAllByProject(id: number) {
     return this.http.get<UserStory[]>(`${environment.apiUrl}/userstory/project/${id}`);
   }
+
+  delete(id: number) {
+    return this.http.delete(`${environment.apiUrl}/userstory/${id}`);
+  }
 }

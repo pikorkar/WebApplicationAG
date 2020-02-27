@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UserStory } from './model/user-story';
 import { first } from 'rxjs/operators';
 import { EngineeringTaskService } from '../engineering-task/service/engineering-task.service';
+import { UserStoryService } from './service/user-story.service';
 
 @Component({
   selector: 'app-user-story',
@@ -13,12 +14,13 @@ export class UserStoryComponent implements OnInit {
 
   @Input() userStory: UserStory;
 
-  constructor(private engineeringTaskService: EngineeringTaskService) { }
+  constructor(private engineeringTaskService: EngineeringTaskService,
+    private userStoryService: UserStoryService) { }
 
   ngOnInit() {
     this.getEngineeringTasks(this.userStory);
   }
-  
+
   expand() {
     this.isExpanded = !this.isExpanded;
   }
@@ -37,6 +39,17 @@ export class UserStoryComponent implements OnInit {
     }, error => {
       alert(error);
     });
+  }
+
+  // TODO
+  delete(id: number) {
+    if (confirm("Are you sure to delete Usser Story")) {
+      this.userStoryService.delete(id).subscribe(() => {
+
+      }, error => {
+        alert(error);
+      });
+    }
   }
 
 }

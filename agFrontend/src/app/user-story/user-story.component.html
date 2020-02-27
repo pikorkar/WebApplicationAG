@@ -1,19 +1,22 @@
 <div class="user-story">
-    <div class="user-story_main" (click)="expand(userStory)">
-        <h3>{{userStory.name}}</h3>
+    <div class="user-story_main">
+        <h3>
+            <span (click)="expand(userStory)">{{userStory.name}}</span>
+            <button type="button" class="btn btn-danger user-story_button-item"
+                (click)="delete(userStory.id)">Delete</button>
+        </h3>
         Remaining hours: {{userStory.hoursRemaining}}
         <div class="progress">
-            <div class="progress-bar bg-info" role="progressbar" [style.width.%]="userStory.donePercent" aria-valuenow="50"
-                aria-valuemin="0" aria-valuemax="100">{{ userStory.donePercent }}% done</div>
+            <div class="progress-bar bg-info" role="progressbar" [style.width.%]="userStory.donePercent"
+                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">{{ userStory.donePercent }}% done</div>
         </div>
     </div>
 
     <div *ngIf="isExpanded">
         <ul class="list-group list-group-flush">
             <li *ngFor="let engineeringTask of userStory.engineeringTasks"
-                 class="list-group-item user-story_engineering-task">
-                <app-engineering-task 
-                    [engineeringTask]="engineeringTask">
+                class="list-group-item user-story_engineering-task">
+                <app-engineering-task [engineeringTask]="engineeringTask">
                 </app-engineering-task>
             </li>
         </ul>

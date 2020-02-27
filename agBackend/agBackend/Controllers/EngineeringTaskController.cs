@@ -85,5 +85,12 @@ namespace agBackend.Controllers
 
             return Ok(engineeringTask);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _engineeringTaskService.Delete(id);
+            return Ok();
+        }
     }
 }

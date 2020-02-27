@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserService } from '../services/user.service';
-import { User } from '../models/user';
+import { UserService } from '../service/user.service';
+import { User } from '../model/user';
 import { FormGroup, FormBuilder, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
-import { Role } from '../models/role';
+import { Role } from '../model/role';
 import { first } from 'rxjs/operators';
 
 @Component({

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
-import { UserService } from '../services/user.service';
+import { UserService } from '../service/user.service';
 import { first } from 'rxjs/operators';
-import { Role } from '../models/role';
+import { Role } from '../model/role';
 
 @Component({
   selector: 'app-register',
@@ -99,6 +99,7 @@ export class UserRegisterComponent implements OnInit {
       },
       error => {
         this.loading = false;
+        alert(error);
       }
     )
   }

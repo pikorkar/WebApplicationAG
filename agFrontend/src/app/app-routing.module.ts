@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './services/authentication/auth-guard.service';
-import { Role } from './users/models/role';
+import { Role } from './users/model/role';
 import { UserRegisterComponent } from './users/user-register/user-register.component';
 import { UserManagerComponent } from './users/user-manager/user-manager.component';
 import { ProjectComponent } from './project/project.component';

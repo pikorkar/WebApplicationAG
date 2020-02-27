@@ -12,6 +12,7 @@ namespace agBackend.Services
         IEnumerable<ProjectModel> GetAll();
         ProjectModel Create(ProjectCreateModel model);
         ProjectModel GetById(int id);
+        void Delete(int id);
     }
 
     public class ProjectService : IProjectService
@@ -59,6 +60,50 @@ namespace agBackend.Services
         public ProjectModel GetById(int id)
         {
             return _context.Projects.Find(id);
+        }
+
+        public void Delete(int id)
+        {
+            var sprints = GetSprints(id);
+
+            foreach (var sprint in sprints)
+            {
+                var userStories = GetUserStories(sprint.Id);
+                foreach (var userStory in userStories) {
+                    var engineeringTasks = GetEnginneringTasks(userStory.Id);
+                    foreach (var engineeringTask in engineeringTasks)
+                    {
+                        _context.EngineeringTasks.Remove(engineeringTask);
+                        _context.SaveChanges();
+                    }
+                    _context.UserStories.Remove(userStory);
+                    _context.SaveChanges();
+                }
+                _context.Sprints.Remove(sprint);
+                _context.SaveChanges();
+            }
+        
+            var project = _context.Projects.Find(id);
+            if (project != null)
+            {
+                _context.Projects.Remove(project);
+                _context.SaveChanges();
+            }
+        }
+
+        private IEnumerable<SprintModel> GetSprints(int id)
+        {
+            return _context.Sprints.Where(x => x.ProjectId == id).ToList();
+        }
+
+        private IEnumerable<UserStoryModel> GetUserStories(int id)
+        {
+            return _context.UserStories.Where(x => x.SprintId == id).ToList();
+        }
+
+        private IEnumerable<EngineeringTaskModel> GetEnginneringTasks(int id)
+        {
+            return _context.EngineeringTasks.Where(x => x.UserStoryId == id).ToList();
         }
     }
    

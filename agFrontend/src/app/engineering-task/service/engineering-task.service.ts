@@ -33,4 +33,8 @@ export class EngineeringTaskService {
   getById(id: number) {
     return this.http.get<EngineeringTask>(`${environment.apiUrl}/engineeringtask/${id}`);
   }
+
+  delete(id: number) {
+    return this.http.delete(`${environment.apiUrl}/engineeringtask/${id}`);
+  }
 }

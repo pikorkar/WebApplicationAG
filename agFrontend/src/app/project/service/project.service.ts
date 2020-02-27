@@ -21,4 +21,8 @@ export class ProjectService {
   getById(id: number) {
     return this.http.get<Project>(`${environment.apiUrl}/project/${id}`);
   }
+
+  delete(id: number) {
+    return this.http.delete(`${environment.apiUrl}/project/${id}`);
+  }
 }

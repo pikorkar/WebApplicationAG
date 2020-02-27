@@ -1,7 +1,7 @@
 <div class="project">
     <div class="card mt-4">
         <h1 class="card-header">Projects
-            <div class="project_buttons">
+            <div class="project_button">
                 <button type="button" class="btn btn-primary" (click)="create()">New
                     Project</button>
             </div>
@@ -9,11 +9,12 @@
         </h1>
         <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
         <ul *ngIf="projects && !loading" class="list-group list-group-flush">
-            <li *ngFor="let project of projects" class="list-group-item project_item" (click)="getDetail(project.id)">
-                <h4>{{ project.name }}</h4>
-                <!-- <div class="project_buttons">
-                    <button type="button" class="btn btn-primary" (click)="getDetail(project.id)">Open</button>
-                </div> -->
+            <li *ngFor="let project of projects" class="list-group-item">
+                <h4>
+                    <span class="project_item" (click)="getDetail(project.id)">{{ project.name }}</span>
+                    <button [disabled]="authenticationService.currentUserValue.role != adminRole" type="button"
+                        class="btn btn-danger project_button-item" (click)="delete(project.id)">Delete</button>
+                </h4>
             </li>
         </ul>
     </div>

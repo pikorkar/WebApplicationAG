@@ -63,6 +63,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
+  deleteProject() {
+    if (confirm("Are you sure to delete Project")) {
+      this.projectService.delete(this.projectId).subscribe(() => {
+        this.router.navigate(['/projects']);
+      }, error => {
+        alert(error);
+      });
+    }
+  }
 
   ngOnDestroy() {
     this.routeSub.unsubscribe();

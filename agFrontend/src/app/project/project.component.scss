@@ -1,5 +1,5 @@
 .project {
-    &_buttons {
+    &_button {
         float: right;
     }
     &_item {
@@ -9,4 +9,7 @@
             cursor: pointer;
         }
     } 
+    &_button-item {
+        float: right;
+    }
 }

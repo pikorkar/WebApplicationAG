@@ -1,16 +1,13 @@
 .user-story {
     &_main {
-        cursor: pointer;
-        &:hover {
-            h3 {
+        h3 {
+            &:hover {
                 color: blue;
+                cursor: pointer;
             }
         }
     }
-    &_engineering-task {
-        cursor: pointer;
-        &:hover {
-            color: blue;
-        }
+    &_button-item {
+        float: right;
     }
 }

@@ -68,5 +68,13 @@ namespace agBackend.Controllers
             return Ok(model);
         }
 
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _userStoryService.Delete(id);
+            return Ok();
+        }
+
     }
 }

@@ -1,18 +1,19 @@
-<!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-primary" *ngIf="currentUser">
-  <div class="container-fluid">
-    <div class="nav navbar-nav">
-      <a class="nav-item nav-link" routerLink="/">Projects</a>
-      <a *ngIf="this.isAdmin" class="nav-item nav-link" routerLink="/userManager">Manage users</a>
-    </div>
-    <div class="d-flex justify-content-center">
-      <span class="navbar-brand">{{ currentUser.username }}</span>
-    </div>
-    <div class="nav navbar-nav navbar-right">
-      <a class="nav-item nav-link" (click)="logout()">Logout</a>
-    </div>
+<div class="app">
+  <!-- nav -->
+  <nav class="navbar navbar-expand navbar-dark bg-primary" *ngIf="currentUser">
+    <div class="container-fluid">
+      <div class="nav navbar-nav">
+        <a class="nav-item nav-link" routerLink="/">Projects</a>
+        <a *ngIf="this.isAdmin" class="nav-item nav-link" routerLink="/userManager">Manage users</a>
+      </div>
+      <div>
+        <span class="navbar-brand app_navbar-brand">{{ currentUser.username }}</span>
+      </div>
+      <div class="nav navbar-nav navbar-right">
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+      </div>
 
-    <!-- <ul class="nav navbar-nav navbar-right">
+      <!-- <ul class="nav navbar-nav navbar-right">
       <li class="nav-item dropdown" dropdown>
         <a dropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" type="button"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,18 +27,19 @@
         </div>
       </li>
     </ul> -->
+    </div>
+  </nav>
+
+  <!-- main app container -->
+  <div class="container">
+    <router-outlet></router-outlet>
   </div>
-</nav>
 
-<!-- main app container -->
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
-
-<!-- credits -->
-<div class="text-center mt-4">
-  <p>
-  </p>
-  <p>
-  </p>
+  <!-- credits -->
+  <div class="text-center mt-4">
+    <p>
+    </p>
+    <p>
+    </p>
+  </div>
 </div>

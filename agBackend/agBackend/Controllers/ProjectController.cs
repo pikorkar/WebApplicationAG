@@ -53,5 +53,12 @@ namespace agBackend.Controllers
 
             return Ok(project);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _projectService.Delete(id);
+            return Ok();
+        }
     }
 }

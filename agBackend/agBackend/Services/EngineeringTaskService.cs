@@ -11,6 +11,7 @@ namespace agBackend.Services
         EngineeringTaskModel Create(EngineeringTaskModel model);
         void Update(EngineeringTaskModel engineeringTaskParam);
         EngineeringTaskModel GetById(int id);
+        void Delete(int id);
 
     }
     public class EngineeringTaskService : IEngineeringTaskService
@@ -81,6 +82,16 @@ namespace agBackend.Services
         public EngineeringTaskModel GetById(int id)
         {
             return _context.EngineeringTasks.Find(id);
+        }
+
+        public void Delete(int id)
+        {
+            var engineeringTask = _context.EngineeringTasks.Find(id);
+            if (engineeringTask != null)
+            {
+                _context.EngineeringTasks.Remove(engineeringTask);
+                _context.SaveChanges();
+            }
         }
     }
 }
