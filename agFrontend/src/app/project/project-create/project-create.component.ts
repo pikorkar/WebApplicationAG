@@ -47,7 +47,7 @@ export class ProjectCreateComponent implements OnInit {
       },
       error => {
         this.loading = false;
-        alert(error.message);
+        alert(error);
       }
     )
   }

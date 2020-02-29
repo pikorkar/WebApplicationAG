@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { UserStory } from 'src/app/user-story/model/user-story';
 import { User } from 'src/app/users/model/user';
 import { EngineeringTaskService } from 'src/app/engineering-task/service/engineering-task.service';
@@ -8,7 +8,6 @@ import { UserStoryService } from 'src/app/user-story/service/user-story.service'
 import { UserService } from 'src/app/users/service/user.service';
 import { first } from 'rxjs/operators';
 import { Status } from 'src/app/engineering-task/model/status';
-import { EngineeringTask } from 'src/app/engineering-task/model/engineering-task';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -51,7 +50,7 @@ export class EngineeringTaskUpdateComponent implements OnInit {
     ]).subscribe(([userStories, users, engineeringTask]) => {
       this.userStories = userStories;
       this.users = users;
-      
+
       this.updateForm = this.formBuilder.group({
         name: [engineeringTask.name, Validators.required],
         userId: [engineeringTask.userId, Validators.required],
@@ -76,7 +75,7 @@ export class EngineeringTaskUpdateComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.updateForm.invalid) {
+    if (this.validate() || this.updateForm.invalid) {
       return;
     }
 
@@ -92,6 +91,39 @@ export class EngineeringTaskUpdateComponent implements OnInit {
         alert(error);
       }
     )
+  }
+
+  // TODO name
+  validate(): boolean {
+    var isInvalid: boolean = false;
+
+    if (this.f['doneHours'].value > this.f['estimatedHours'].value) {
+      this.f['doneHours'].setErrors({ 'moreDoneHours': true });
+      isInvalid = true;
+    } else {
+      this.removeError(this.f['doneHours'], 'moreDoneHours');
+    }
+
+    if (this.f['status'].value === Status.Done && this.f['doneHours'].value !== this.f['estimatedHours'].value) {
+      this.f['doneHours'].setErrors({ 'doneHoursAreEqual': true });
+      isInvalid = true;
+    } else {
+      this.removeError(this.f['doneHours'], 'doneHoursAreEqual');
+    }
+
+    return isInvalid;
+  }
+
+  removeError(control: AbstractControl, error: string) {
+    const err = control.errors; // get control errors
+    if (err) {
+      delete err[error]; // delete your own error
+      if (!Object.keys(err).length) { // if no errors left
+        control.setErrors(null); // set control errors to null making it VALID
+      } else {
+        control.setErrors(err); // controls got other errors so set them back
+      }
+    }
   }
 
 }

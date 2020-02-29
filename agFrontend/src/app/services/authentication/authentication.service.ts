@@ -30,10 +30,10 @@ export class AuthenticationService {
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);
           }
-          console.log("eser", user);
           return user;
-        }
-        ));
+        }, error => {
+          alert(error);
+        }));
 
   }
 

@@ -11,7 +11,7 @@ import { ProjectBacklogComponent } from './project/project-backlog/project-backl
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'projects', pathMatch: 'full',canActivate: [AuthGuardService] },
+  { path: '', redirectTo: 'projects', pathMatch: 'full', canActivate: [AuthGuardService] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: UserRegisterComponent },
   { path: 'userManager', component: UserManagerComponent, canActivate: [AuthGuardService], data: { roles: [Role.Admin] } },

@@ -50,11 +50,11 @@ export class ProjectBacklogComponent implements OnInit, OnDestroy {
         this.userStories = userStories;
         this.loading = false;
       }, error => {
-        alert(error.message);
+        alert(error);
       })
 
     }, error => {
-      alert(error.message);
+      alert(error);
     });
 
   }

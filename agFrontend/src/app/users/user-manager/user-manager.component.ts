@@ -37,6 +37,7 @@ export class UserManagerComponent implements OnInit {
   updateUser(id: number) {
     const modalRef = this.modalService.open(UserUpdateComponent);
     modalRef.componentInstance.id = id;
+    modalRef.componentInstance.currentUserId = this.authenticationService.currentUserValue.id;
   }
 
   deletUser(id: number) {

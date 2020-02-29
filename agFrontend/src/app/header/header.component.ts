@@ -15,6 +15,8 @@ import { ProjectService } from '../project/service/project.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   // To get project ID
   private routeSub: Subscription;
+
+  // Project
   private projectId: number;
   public projectName: string;
 
@@ -32,15 +34,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.projectId = params['id'];
     });
 
+    // Get Project data
     this.projectService.getById(this.projectId)
       .subscribe(project => {
         this.projectName = project.name;
       }, error => {
-        alert(error.message);
+        alert(error);
       });
-
   }
 
+  // Open Project backlog
   goToBacklog() {
     this.router.navigate(['backlog'], { relativeTo: this.route });
   }
@@ -49,20 +52,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
   createUserStory() {
     const modalRef = this.modalService.open(UserStoryCreateComponent);
     modalRef.componentInstance.sprintId = this.activeSprintId;
+    modalRef.componentInstance.projectId = this.projectId;
     modalRef.componentInstance["userStoryCreated"].subscribe(event => {
       // TODO emit value -- this.getAllUserStoriesBySprintId(this.activeSprint.id);
     });
   }
 
-  // Open modal window form to create new Engineering Task
+  // Create new Engineering task - modal window
   createEngineeringTask() {
     const modalRef = this.modalService.open(EngineeringTaskCreateComponent);
     modalRef.componentInstance.projectId = this.projectId;
     modalRef.componentInstance["engineeringTaskCreated"].subscribe(event => {
-      location.reload(true);
+      // TODO location.reload(true);
     });
   }
 
+  // Delete Project
   deleteProject() {
     if (confirm("Are you sure to delete Project")) {
       this.projectService.delete(this.projectId).subscribe(() => {

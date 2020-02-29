@@ -34,53 +34,9 @@ export class UserRegisterComponent implements OnInit {
       lastName: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      confirmPassword: ['', [Validators.required, UserRegisterComponent.matchValues('password')]],
+      confirmPassword: ['', Validators.required],
       role: ['', Validators.required]
     });
-  }
-
-  public static matchValues(matchTo: string): ValidationErrors | null {
-    return (control: AbstractControl): ValidationErrors | null => {
-      return !!control.parent &&
-        !!control.parent.value &&
-        control.value === control.parent.controls[matchTo].value
-        ? null
-        : {
-          isMatching: {
-            valid: false
-          }
-        };
-      // return {
-      //   isMatching: {
-      //     valid: false
-      //   }
-      // };
-    };
-  }
-
-  validateUsername(): ValidationErrors {
-      return (false) ? null : {
-        validateUsername: {
-          valid: false
-        }
-      };
-  }
-
-  passwordsMatch2(): ValidatorFn {
-    return (control: FormGroup): { [key: string]: boolean } | null => {
-
-      console.log("debil");
-      if (!control) { return null; }
-      const password = control.get('password');
-      const confirmPassword = control.get('confirmPassword');
-      if (!password.value || !confirmPassword.value) {
-        return null;
-      }
-      if (password.value !== confirmPassword.value) {
-        return { passwordMismatch: true };
-      }
-      return null;
-    };
   }
 
   get f() { return this.registerForm.controls; }
@@ -88,7 +44,7 @@ export class UserRegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.registerForm.invalid) {
+    if (this.validate() || this.registerForm.invalid) {
       return;
     }
 
@@ -102,5 +58,30 @@ export class UserRegisterComponent implements OnInit {
         alert(error);
       }
     )
+  }
+
+  validate(): boolean {
+    var isInvalid: boolean = false;
+
+    if (this.f['confirmPassword'].value !== this.f['password'].value) {
+      this.f['confirmPassword'].setErrors({ 'isMatching': true });
+      isInvalid = true;
+    } else {
+      this.removeError(this.f['confirmPassword'], 'isMatching');
+    }
+
+    return isInvalid;
+  }
+
+  removeError(control: AbstractControl, error: string) {
+    const err = control.errors; 
+    if (err) {
+      delete err[error]; 
+      if (!Object.keys(err).length) { 
+        control.setErrors(null); 
+      } else {
+        control.setErrors(err);
+      }
+    }
   }
 }

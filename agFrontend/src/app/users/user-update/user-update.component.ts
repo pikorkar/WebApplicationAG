@@ -24,6 +24,7 @@ export class UserUpdateComponent implements OnInit {
   ];
 
   @Input() id: number;
+  @Input() currentUserId: number;
 
   constructor(public activeModal: NgbActiveModal,
     private userService: UserService,
@@ -38,35 +39,22 @@ export class UserUpdateComponent implements OnInit {
     this.userService.getById(id).subscribe(
       user => {
         this.user = user;
-
+ 
         this.updateForm = this.formBuilder.group({
           firstName: [user.firstName],
           lastName: [user.lastName],
           username: [user.username],
-          role: [user.role]
+          role: [{value: user.role, disabled: user.id === this.currentUserId}],
+          password: ['', Validators.required],
+          confirmPassword: ['', Validators.required],
         });
         this.loading = false;
       },
       error => {
-        alert(error.message);
+        alert(error);
         this.loading = false;
       }
     );
-  }
-
-  public static matchValues(matchTo: string): ValidationErrors | null {
-    return (control: AbstractControl): ValidationErrors | null => {
-      // return !!control.parent &&
-      //   !!control.parent.value &&
-      //   control.value === control.parent.controls[matchTo].value
-      //   ? null
-      //   : { isMatching: false };
-      return {
-        isMatching: {
-          valid: false
-        }
-      };
-    };
   }
 
   get f() { return this.updateForm.controls; }
@@ -74,7 +62,7 @@ export class UserUpdateComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.updateForm.invalid) {
+    if (this.validate() || this.updateForm.invalid) {
       return;
     }
 
@@ -86,9 +74,33 @@ export class UserUpdateComponent implements OnInit {
       },
       error => {
         this.submittedLoading = false;
-        alert(error.message);
+        alert(error);
       }
     )
   }
 
+  validate(): boolean {
+    var isInvalid: boolean = false;
+
+    if (this.f['confirmPassword'].value !== this.f['password'].value) {
+      this.f['confirmPassword'].setErrors({ 'isMatching': true });
+      isInvalid = true;
+    } else {
+      this.removeError(this.f['confirmPassword'], 'isMatching');
+    }
+
+    return isInvalid;
+  }
+
+  removeError(control: AbstractControl, error: string) {
+    const err = control.errors; 
+    if (err) {
+      delete err[error]; 
+      if (!Object.keys(err).length) { 
+        control.setErrors(null); 
+      } else {
+        control.setErrors(err);
+      }
+    }
+  }
 }

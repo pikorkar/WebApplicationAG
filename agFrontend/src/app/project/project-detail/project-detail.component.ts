@@ -24,6 +24,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
 
   // Project
   projectId: number;
+  isProjectInPast: boolean = true;
 
   // Sprints
   sprints: Sprint[] = [];
@@ -53,24 +54,23 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
         this.sprints = sprints;
         this.findActiveSprint();
       }, error => {
-        alert(error.message);
+        alert(error);
       });
   }
 
   findActiveSprint() {
     if (this.sprints.length > 0) {
-      let projectIsInpast: boolean = true;
       for (let sprint of this.sprints) {
         if (moment().isBetween(moment(sprint.startDate), moment(sprint.endDate), 'day', '[]')) {
           sprint.active = true;
-          projectIsInpast = false;
+          this.isProjectInPast = false;
           this.activeSprint = sprint;
           this.sprintStart = moment(sprint.startDate).format('DD.MM.YYYY');
           this.sprintEnd = moment(sprint.endDate).format('DD.MM.YYYY');
           break;
         }
       }
-      if (projectIsInpast) {
+      if (this.isProjectInPast) {
         this.sprints[0].active = true;
         this.activeSprint = this.sprints[0];
         this.sprintStart = moment(this.sprints[0].startDate).format('DD.MM.YYYY');
@@ -86,7 +86,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
       this.userStories = userStories;
       this.loading = false;
     }, error => {
-      alert(error.message);
+      alert(error);
     });
   }
 

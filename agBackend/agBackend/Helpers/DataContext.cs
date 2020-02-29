@@ -15,8 +15,8 @@ namespace agBackend.Helpers
 
         protected override void OnConfiguring(DbContextOptionsBuilder options) {
             // connect to database SQL
-            // options.UseSqlServer(Configuration.GetConnectionString("Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=agDatabase;Data Source=LAPTOP-6918CLND;"));
-            options.UseSqlServer("Data Source=LAPTOP-6918CLND;Initial Catalog=agDatabase;Persist Security Info=False;Integrated Security=SSPI;");
+            options.UseSqlServer(Configuration.GetConnectionString("WebApiDatabase"));
+            //options.UseSqlServer("Data Source=LAPTOP-6918CLND;Initial Catalog=agDatabase;Persist Security Info=False;Integrated Security=SSPI;");
         }
 
         public DbSet<User> Users { get; set;  }
