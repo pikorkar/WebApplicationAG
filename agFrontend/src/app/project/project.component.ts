@@ -7,6 +7,7 @@ import { ProjectCreateComponent } from './project-create/project-create.componen
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication/authentication.service';
 import { Role } from '../users/model/role';
+import { AlertService } from '../alert/service/alert.service';
 
 @Component({
   selector: 'app-project',
@@ -22,7 +23,8 @@ export class ProjectComponent implements OnInit {
   constructor(private projectService: ProjectService,
     private modalService: NgbModal,
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.getAll();
@@ -58,14 +60,16 @@ export class ProjectComponent implements OnInit {
     const modalRef = this.modalService.open(ProjectCreateComponent);
     modalRef.componentInstance["projectCreated"].subscribe(event => {
       this.getAll();
+      this.alertService.success('Project has been created.');
     });
   }
 
   // Delete Project
   delete(id: number) {
-    if (confirm("Are you sure to delete project")) {
+    if (confirm("Are you sure to delete Project?")) {
       this.projectService.delete(id).subscribe(() => {
         this.getAll();
+        this.alertService.success('Project has been deleted.');
       }, error => {
         alert(error);
       });

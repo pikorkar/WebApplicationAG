@@ -20,8 +20,7 @@ export class ProjectCreateComponent implements OnInit {
   
   constructor(private formBuilder: FormBuilder,
     private projectService: ProjectService,
-    public activeModal: NgbActiveModal,
-    private alertService: AlertService) { }
+    public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
     this.createForm = this.formBuilder.group({
@@ -45,7 +44,6 @@ export class ProjectCreateComponent implements OnInit {
     this.projectService.create(this.createForm.value).pipe(first()).subscribe(
       data => {
         this.activeModal.close();
-        this.alertService.success('Project has been created.');
         this.projectCreated.emit();
       },
       error => {

@@ -5,6 +5,7 @@ import { EngineeringTaskService } from '../engineering-task/service/engineering-
 import { UserStoryService } from './service/user-story.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserStoryUpdateComponent } from './user-story-update/user-story-update.component';
+import { AlertService } from '../alert/service/alert.service';
 
 @Component({
   selector: 'app-user-story',
@@ -23,7 +24,8 @@ export class UserStoryComponent implements OnInit {
 
   constructor(private engineeringTaskService: EngineeringTaskService,
     private userStoryService: UserStoryService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.getEngineeringTasks(this.userStory);
@@ -56,14 +58,16 @@ export class UserStoryComponent implements OnInit {
     modalRef.componentInstance.projectId = this.projectId;
     modalRef.componentInstance["userStoryUpdated"].subscribe(event => {
       this.userStoryUD.emit();
+      this.alertService.success('User Story has been updated.');
     });
   }
 
   // Delete User Story
   delete(id: number) {
-    if (confirm("Are you sure to delete Usser Story")) {
+    if (confirm("Are you sure to delete User Story?")) {
       this.userStoryService.delete(id).subscribe(() => {
         this.userStoryUD.emit();
+        this.alertService.success('User Story has been deleted.');
       }, error => {
         alert(error);
       });

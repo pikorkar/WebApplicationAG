@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { UserService } from '../service/user.service';
 import { first } from 'rxjs/operators';
 import { Role } from '../model/role';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-register',
@@ -13,21 +14,22 @@ import { Role } from '../model/role';
 })
 export class UserRegisterComponent implements OnInit {
   registerForm: FormGroup;
-  loading = false;
-  submitted = false;
+  loading: boolean = false;
+  submitted: boolean = false;
   roles = [
     { value: Role.Admin, label: 'Admin' },
     { value: Role.ProductOwner, label: 'Product Owner' },
     { value: Role.ScrumMaster, label: 'Scrum Master' },
     { value: Role.User, label: 'User' }
   ];
+
+  // Output
+  @Output() userCreated: EventEmitter<any> = new EventEmitter();
+
   constructor(private formBuilder: FormBuilder,
     private router: Router,
-    private authenticationService: AuthenticationService,
-    private userService: UserService) {
-    if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
-    }
+    private userService: UserService,
+    public activeModal: NgbActiveModal, ) {
   }
 
   ngOnInit() {
@@ -53,7 +55,8 @@ export class UserRegisterComponent implements OnInit {
     this.loading = true;
     this.userService.register(this.registerForm.value).pipe(first()).subscribe(
       data => {
-        this.router.navigate(['/login']);
+        this.activeModal.close();
+        this.userCreated.emit();
       },
       error => {
         this.loading = false;
@@ -76,11 +79,11 @@ export class UserRegisterComponent implements OnInit {
   }
 
   removeError(control: AbstractControl, error: string) {
-    const err = control.errors; 
+    const err = control.errors;
     if (err) {
-      delete err[error]; 
-      if (!Object.keys(err).length) { 
-        control.setErrors(null); 
+      delete err[error];
+      if (!Object.keys(err).length) {
+        control.setErrors(null);
       } else {
         control.setErrors(err);
       }

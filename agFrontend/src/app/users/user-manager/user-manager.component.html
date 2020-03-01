@@ -1,6 +1,11 @@
 <div class="user-manager">
     <div class="card mt-4">
-        <h1 class="card-header">Manage users</h1>
+        <h1 class="card-header">Manage users
+            <div class="user-manager_buttons">
+                <button type="button" class="btn btn-primary" (click)="create()">New
+                    User</button>
+            </div>
+        </h1>
         <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
         <ul *ngIf="users && !loading" class="list-group list-group-flush">
             <li class="list-group-item" *ngFor="let user of users; let i = index">

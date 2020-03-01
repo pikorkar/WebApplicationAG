@@ -45,7 +45,7 @@ export class UserStoryUpdateComponent implements OnInit {
           sprintId: [userStory.sprintId, Validators.required],
         });
   
-        // End loading
+        // Stop loading
         this.loading = false;
       }, error => {
         alert(error);
@@ -66,7 +66,6 @@ export class UserStoryUpdateComponent implements OnInit {
       this.userStoryService.update(this.userStoryId, this.updateForm.value).pipe(first()).subscribe(
         data => {
           this.activeModal.close();
-          alert('User Story has been saved.');
           this.userStoryUpdated.emit();
         },
         error => {

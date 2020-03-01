@@ -82,14 +82,15 @@ export class EngineeringTaskUpdateComponent implements OnInit {
       return;
     }
 
+    // Start Submitted Loading
     this.submittedLoading = true;
     this.engineeringTaskService.update(this.engineeringTaskId, this.updateForm.value).pipe(first()).subscribe(
       data => {
         this.activeModal.close();
-        alert('Engineering task has been saved.');
         this.engineeringTaskUpdated.emit();
       },
       error => {
+        // Stop Submitted Loading
         this.submittedLoading = false;
         alert(error);
       }

@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import { ProjectService } from '../project/service/project.service';
 import { AuthenticationService } from '../services/authentication/authentication.service';
 import { Role } from '../users/model/role';
+import { AlertService } from '../alert/service/alert.service';
 
 @Component({
   selector: 'app-header',
@@ -33,7 +34,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private location: Location,
     private router: Router,
     private projectService: ProjectService,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     // Get Project ID from route
@@ -70,6 +72,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.projectId = this.projectId;
     modalRef.componentInstance["userStoryCreated"].subscribe(event => {
       this.engTaskUsStoryCreated.emit();
+      this.alertService.success('User Story has been created.');
     });
   }
 
@@ -79,14 +82,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.projectId = this.projectId;
     modalRef.componentInstance["engineeringTaskCreated"].subscribe(event => {
       this.engTaskUsStoryCreated.emit();
+      this.alertService.success('Engineering Task has been created.');
     });
   }
 
   // Delete Project
   deleteProject() {
-    if (confirm("Are you sure to delete Project")) {
+    if (confirm("Are you sure to delete Project?")) {
       this.projectService.delete(this.projectId).subscribe(() => {
         this.router.navigate(['/projects']);
+        this.alertService.success('Project has been deleted.');
       }, error => {
         alert(error);
       });

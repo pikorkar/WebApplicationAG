@@ -12,6 +12,7 @@ import { UserStoryCreateComponent } from 'src/app/user-story/user-story-create/u
 import { EngineeringTaskCreateComponent } from 'src/app/engineering-task/engineering-task-create/engineering-task-create.component';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { Role } from 'src/app/users/model/role';
+import { AlertService } from 'src/app/alert/service/alert.service';
 
 @Component({
   selector: 'app-project-backlog',
@@ -36,7 +37,8 @@ export class ProjectBacklogComponent implements OnInit, OnDestroy {
     private router: Router,
     private location: Location,
     private modalService: NgbModal,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     // Start Loading
@@ -83,6 +85,7 @@ export class ProjectBacklogComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.projectId = this.projectId;
     modalRef.componentInstance["userStoryCreated"].subscribe(event => {
       this.getAllUserStories();
+      this.alertService.success('User Story has been created.');
     });
   }
 
@@ -92,14 +95,16 @@ export class ProjectBacklogComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.projectId = this.projectId;
     modalRef.componentInstance["engineeringTaskCreated"].subscribe(event => {
       this.getAllUserStories();
+      this.alertService.success('Engineering Task has been created.');
     });
   }
 
   // Delete Project
   deleteProject() {
-    if (confirm("Are you sure to delete Project")) {
+    if (confirm("Are you sure to delete Project?")) {
       this.projectService.delete(this.projectId).subscribe(() => {
         this.router.navigate(['/projects']);
+        this.alertService.success('Project has been deleted.');
       }, error => {
         alert(error);
       });

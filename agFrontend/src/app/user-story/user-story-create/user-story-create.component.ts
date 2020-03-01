@@ -64,7 +64,6 @@ export class UserStoryCreateComponent implements OnInit {
     this.userStoryService.create(this.createForm.value).pipe(first()).subscribe(
       data => {
         this.activeModal.close();
-        alert('User story has been created.');
         this.userStoryCreated.emit();
       },
       error => {

@@ -71,7 +71,8 @@ import { AlertComponent } from './alert/alert.component';
     UserStoryCreateComponent,
     EngineeringTaskCreateComponent,
     EngineeringTaskUpdateComponent,
-    UserStoryUpdateComponent
+    UserStoryUpdateComponent,
+    UserRegisterComponent
   ]
 })
 export class AppModule { }

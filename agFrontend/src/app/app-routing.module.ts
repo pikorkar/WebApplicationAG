@@ -14,7 +14,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
   { path: '', redirectTo: 'projects', pathMatch: 'full', canActivate: [AuthGuardService] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: UserRegisterComponent },
   { path: 'userManager', component: UserManagerComponent, canActivate: [AuthGuardService], data: { roles: [Role.Admin] } },
   { path: 'projects', component: ProjectComponent, canActivate: [AuthGuardService] },
   { path: 'projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuardService] },

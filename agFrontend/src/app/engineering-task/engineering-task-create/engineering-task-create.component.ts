@@ -68,7 +68,6 @@ export class EngineeringTaskCreateComponent implements OnInit {
     this.engineeringTaskService.create(this.createForm.value).pipe(first()).subscribe(
       data => {
         this.activeModal.close();
-        alert('Engineering task has been created.');
         this.engineeringTaskCreated.emit();
       },
       error => {

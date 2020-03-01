@@ -5,6 +5,7 @@ import { EngineeringTaskUpdateComponent } from './engineering-task-update/engine
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { EngineeringTaskService } from './service/engineering-task.service';
+import { AlertService } from '../alert/service/alert.service';
 
 @Component({
   selector: 'app-engineering-task',
@@ -24,7 +25,8 @@ export class EngineeringTaskComponent implements OnInit, OnDestroy {
 
   constructor(private modalService: NgbModal,
     private route: ActivatedRoute,
-    private engineeringTaskService: EngineeringTaskService) { }
+    private engineeringTaskService: EngineeringTaskService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     // Get Project ID from route
@@ -40,13 +42,16 @@ export class EngineeringTaskComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.engineeringTaskId = this.engineeringTask.id;
     modalRef.componentInstance["engineeringTaskUpdated"].subscribe(event => {
       this.engineeringTaskUD.emit();
+      this.alertService.success('Engineering Task has been updated.');
     });
   }
 
+  // Delete Engineering Task
   delete(id: number) {
-    if (confirm("Are you sure to delete Engineering Task")) {
+    if (confirm("Are you sure to delete Engineering Task?")) {
       this.engineeringTaskService.delete(id).subscribe(() => {
         this.engineeringTaskUD.emit();
+        this.alertService.success('Engineering Task has been deleted.');
       }, error => {
         alert(error);
       });
