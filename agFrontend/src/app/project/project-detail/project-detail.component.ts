@@ -21,6 +21,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
 
   // Loading
   loading: boolean = false;
+  userStoriesLoading: boolean = false;
 
   // Project
   projectId: number;
@@ -40,7 +41,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     private userStoryService: UserStoryService) { }
 
   ngOnInit() {
-    // start loading
+    // Start loading
     this.loading = true;
 
     // Get Project ID from route
@@ -76,16 +77,19 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
         this.sprintStart = moment(this.sprints[0].startDate).format('DD.MM.YYYY');
         this.sprintEnd = moment(this.sprints[0].endDate).format('DD.MM.YYYY');
       }
+      // Stop loading
+      this.loading = false;
       this.getAllUserStoriesBySprintId(this.activeSprint.id);
     }
   }
 
   // Return User Stories in selected Sprint
   getAllUserStoriesBySprintId(id: number) {
-    this.loading = true;
+    // Start User Stories Loading
+    this.userStoriesLoading = true;
     this.userStoryService.getAllBySprint(id).pipe(first()).subscribe(userStories => {
       this.userStories = userStories;
-      this.loading = false;
+      this.userStoriesLoading = false;
     }, error => {
       alert(error);
     });

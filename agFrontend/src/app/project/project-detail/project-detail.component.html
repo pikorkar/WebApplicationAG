@@ -18,7 +18,8 @@
                 </ul>
                 Selected sprint: {{sprintStart}} - {{sprintEnd}}
             </div>
-            <ul *ngIf="this.userStories" class="list-group">
+            <div *ngIf="userStoriesLoading" class="spinner-border spinner-border-sm"></div>
+            <ul *ngIf="!userStoriesLoading" class="list-group">
                 <li *ngFor="let userStory of userStories" class="list-group-item">
                     <app-user-story [userStory]="userStory" [projectId]="projectId"
                         (userStoryUD)="getAllUserStoriesBySprintId(activeSprint.id)">
