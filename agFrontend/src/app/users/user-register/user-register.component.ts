@@ -17,6 +17,8 @@ export class UserRegisterComponent implements OnInit {
   submitted = false;
   roles = [
     { value: Role.Admin, label: 'Admin' },
+    { value: Role.ProductOwner, label: 'Product Owner' },
+    { value: Role.ScrumMaster, label: 'Scrum Master' },
     { value: Role.User, label: 'User' }
   ];
   constructor(private formBuilder: FormBuilder,

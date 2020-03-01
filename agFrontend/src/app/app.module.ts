@@ -26,6 +26,7 @@ import { HeaderComponent } from './header/header.component';
 import { UserStoryUpdateComponent } from './user-story/user-story-update/user-story-update.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     EngineeringTaskComponent,
     HeaderComponent,
     UserStoryUpdateComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

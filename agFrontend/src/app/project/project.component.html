@@ -2,7 +2,7 @@
     <div class="card mt-4">
         <h1 class="card-header">Projects
             <div class="project_button">
-                <button type="button" class="btn btn-primary" (click)="create()">New
+                <button [disabled]="!canActivate" type="button" class="btn btn-primary" (click)="create()">New
                     Project</button>
             </div>
 
@@ -12,8 +12,8 @@
             <li *ngFor="let project of projects" class="list-group-item">
                 <h4>
                     <span class="project_item" (click)="getDetail(project.id)">{{ project.name }}</span>
-                    <button [disabled]="authenticationService.currentUserValue.role != adminRole" type="button"
-                        class="btn btn-danger project_button-item" (click)="delete(project.id)">Delete</button>
+                    <button [disabled]="!canActivate" type="button" class="btn btn-danger project_button-item"
+                        (click)="delete(project.id)">Delete</button>
                 </h4>
             </li>
         </ul>

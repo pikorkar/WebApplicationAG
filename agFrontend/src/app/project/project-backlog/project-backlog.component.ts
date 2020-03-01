@@ -7,6 +7,11 @@ import { ProjectService } from '../service/project.service';
 import { first } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserStoryCreateComponent } from 'src/app/user-story/user-story-create/user-story-create.component';
+import { EngineeringTaskCreateComponent } from 'src/app/engineering-task/engineering-task-create/engineering-task-create.component';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { Role } from 'src/app/users/model/role';
 
 @Component({
   selector: 'app-project-backlog',
@@ -27,12 +32,14 @@ export class ProjectBacklogComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
     private userStoryService: UserStoryService,
-    private projectService: ProjectService, 
+    private projectService: ProjectService,
     private router: Router,
-    private location: Location) { }
+    private location: Location,
+    private modalService: NgbModal,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    // start loading
+    // Start Loading
     this.loading = true;
 
     // Get Project ID from route
@@ -43,20 +50,60 @@ export class ProjectBacklogComponent implements OnInit, OnDestroy {
     // Get Project - by ID from route
     this.projectService.getById(this.projectId).pipe(first()).subscribe(project => {
       this.project = project;
-
-
-      // Get all User Stories by Project
-      this.userStoryService.getAllByProject(this.projectId).pipe(first()).subscribe(userStories => {
-        this.userStories = userStories;
-        this.loading = false;
-      }, error => {
-        alert(error);
-      })
+      this.getAllUserStories();
 
     }, error => {
       alert(error);
     });
+  }
 
+  // Can delete Project
+  get canActivate(): boolean {
+    if (this.authenticationService.currentUserValue.role === Role.Admin ||
+      this.authenticationService.currentUserValue.role === Role.ProductOwner)
+      return true;
+    return false;
+  }
+
+  // Get all User Stories by Project
+  getAllUserStories() {
+    this.userStoryService.getAllByProject(this.projectId).pipe(first()).subscribe(userStories => {
+      this.userStories = userStories;
+
+      // End Loading
+      this.loading = false;
+    }, error => {
+      alert(error);
+    })
+  }
+
+  // Create new User Story - modal window
+  createUserStory() {
+    const modalRef = this.modalService.open(UserStoryCreateComponent);
+    modalRef.componentInstance.projectId = this.projectId;
+    modalRef.componentInstance["userStoryCreated"].subscribe(event => {
+      this.getAllUserStories();
+    });
+  }
+
+  // Create new Engineering task - modal window
+  createEngineeringTask() {
+    const modalRef = this.modalService.open(EngineeringTaskCreateComponent);
+    modalRef.componentInstance.projectId = this.projectId;
+    modalRef.componentInstance["engineeringTaskCreated"].subscribe(event => {
+      this.getAllUserStories();
+    });
+  }
+
+  // Delete Project
+  deleteProject() {
+    if (confirm("Are you sure to delete Project")) {
+      this.projectService.delete(this.projectId).subscribe(() => {
+        this.router.navigate(['/projects']);
+      }, error => {
+        alert(error);
+      });
+    }
   }
 
   ngOnDestroy() {

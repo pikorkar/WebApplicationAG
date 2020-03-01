@@ -9,13 +9,12 @@
         <div class="header_buttons">
             <button type="button" class="header_button-item btn btn-primary" (click)="goToBacklog()">Project
                 Backlog</button>
-
             <button type="button" class="header_button-item btn btn-primary" (click)="createEngineeringTask()">New
                 engineering
                 Task</button>
             <button type="button" class="header_button-item btn btn-primary" (click)="createUserStory()">New User
                 Story</button>
-            <button type="button" class="header_button-item btn btn-danger" (click)="deleteProject()">Delete</button>
+            <button [disabled]="!canActivate" type="button" class="header_button-item btn btn-danger" (click)="deleteProject()">Delete</button>
         </div>
     </h1>
 </div>

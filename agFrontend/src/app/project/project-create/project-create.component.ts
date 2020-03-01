@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProjectService } from 'src/app/project/service/project.service';
 import { first } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertService } from 'src/app/alert/service/alert.service';
 
 @Component({
   selector: 'app-project-create',
@@ -19,7 +20,8 @@ export class ProjectCreateComponent implements OnInit {
   
   constructor(private formBuilder: FormBuilder,
     private projectService: ProjectService,
-    public activeModal: NgbActiveModal) { }
+    public activeModal: NgbActiveModal,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.createForm = this.formBuilder.group({
@@ -43,7 +45,7 @@ export class ProjectCreateComponent implements OnInit {
     this.projectService.create(this.createForm.value).pipe(first()).subscribe(
       data => {
         this.activeModal.close();
-        alert('Project has been created.');
+        this.alertService.success('Project has been created.');
         this.projectCreated.emit();
       },
       error => {

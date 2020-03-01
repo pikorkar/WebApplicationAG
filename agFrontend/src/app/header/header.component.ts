@@ -6,6 +6,8 @@ import { UserStoryCreateComponent } from '../user-story/user-story-create/user-s
 import { EngineeringTaskCreateComponent } from '../engineering-task/engineering-task-create/engineering-task-create.component';
 import { Location } from '@angular/common';
 import { ProjectService } from '../project/service/project.service';
+import { AuthenticationService } from '../services/authentication/authentication.service';
+import { Role } from '../users/model/role';
 
 @Component({
   selector: 'app-header',
@@ -30,7 +32,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private location: Location,
     private router: Router,
-    private projectService: ProjectService) { }
+    private projectService: ProjectService,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     // Get Project ID from route
@@ -50,6 +53,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   // Open Project backlog
   goToBacklog() {
     this.router.navigate(['backlog'], { relativeTo: this.route });
+  }
+
+  // Can delete Project
+  get canActivate(): boolean {
+    if (this.authenticationService.currentUserValue.role === Role.Admin ||
+      this.authenticationService.currentUserValue.role === Role.ProductOwner)
+      return true;
+    return false;
   }
 
   // Create new User Story - modal window

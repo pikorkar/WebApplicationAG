@@ -19,8 +19,11 @@ export class UserStoryUpdateComponent implements OnInit {
   submitted: boolean = false;
   sprints: Sprint[];
 
+  // Input
   @Input() projectId: number;
   @Input() userStoryId: number;
+
+  // Output
   @Output() userStoryUpdated: EventEmitter<any> = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,

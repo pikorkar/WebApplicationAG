@@ -14,8 +14,8 @@ export class UserStoryService {
     return this.http.get<UserStory[]>(`${environment.apiUrl}/userstory/sprint/${id}`);
   }
 
-  create(userStory: UserStory, sprintId: number) {
-    userStory.sprintId = sprintId;
+  create(userStory: UserStory) {
+    userStory.sprintId = Number(userStory.sprintId);
     return this.http.post(`${environment.apiUrl}/userstory/create`, userStory);
   }
 

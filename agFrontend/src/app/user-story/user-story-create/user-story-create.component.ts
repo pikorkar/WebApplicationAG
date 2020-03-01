@@ -61,7 +61,7 @@ export class UserStoryCreateComponent implements OnInit {
 
     // Start Submitted Loading
     this.submittedLoading = true;
-    this.userStoryService.create(this.createForm.value, this.sprintId).pipe(first()).subscribe(
+    this.userStoryService.create(this.createForm.value).pipe(first()).subscribe(
       data => {
         this.activeModal.close();
         alert('User story has been created.');

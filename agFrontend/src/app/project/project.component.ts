@@ -17,6 +17,7 @@ export class ProjectComponent implements OnInit {
   loading: boolean = false;
   projects: Project[];
   adminRole: Role = Role.Admin;
+  productOwner: Role = Role.ProductOwner;
 
   constructor(private projectService: ProjectService,
     private modalService: NgbModal,
@@ -25,6 +26,14 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
+  }
+
+  // Can delete or create Project
+  get canActivate(): boolean {
+    if (this.authenticationService.currentUserValue.role === Role.Admin ||
+      this.authenticationService.currentUserValue.role === Role.ProductOwner)
+      return true;
+    return false;
   }
 
   // Get all Projects
@@ -44,8 +53,8 @@ export class ProjectComponent implements OnInit {
     this.router.navigateByUrl(`projects/${id}`);
   }
 
-   // Create Project - open modal form
-   create() {
+  // Create Project - open modal form
+  create() {
     const modalRef = this.modalService.open(ProjectCreateComponent);
     modalRef.componentInstance["projectCreated"].subscribe(event => {
       this.getAll();

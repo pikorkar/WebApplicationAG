@@ -9,5 +9,7 @@ namespace agBackend.Entities
     {
         public const string Admin = "Admin";
         public const string User = "User";
+        public const string ProductOwner  = "ProductOwner";
+        public const string ScrumMaster = "ScrumMaster";
     }
 }
