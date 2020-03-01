@@ -8,6 +8,7 @@ import { UserManagerComponent } from './users/user-manager/user-manager.componen
 import { ProjectComponent } from './project/project.component';
 import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
 import { ProjectBacklogComponent } from './project/project-backlog/project-backlog.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path: 'projects/:id/backlog', component: ProjectBacklogComponent, canActivate: [AuthGuardService] },
 
   // otherwise redirect to home
-  { path: '**', redirectTo: '' }
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

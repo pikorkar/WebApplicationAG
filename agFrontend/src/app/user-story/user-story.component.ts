@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserStory } from './model/user-story';
 import { first } from 'rxjs/operators';
 import { EngineeringTaskService } from '../engineering-task/service/engineering-task.service';
@@ -14,8 +14,12 @@ import { UserStoryUpdateComponent } from './user-story-update/user-story-update.
 export class UserStoryComponent implements OnInit {
   public isExpanded: boolean = false;
 
+  // Input
   @Input() userStory: UserStory;
   @Input() projectId: number = null;
+
+   // Output
+   @Output() userStoryUD: EventEmitter<any> = new EventEmitter();
 
   constructor(private engineeringTaskService: EngineeringTaskService,
     private userStoryService: UserStoryService,
@@ -45,24 +49,25 @@ export class UserStoryComponent implements OnInit {
     });
   }
 
-  // TODO
-  delete(id: number) {
-    if (confirm("Are you sure to delete Usser Story")) {
-      this.userStoryService.delete(id).subscribe(() => {
-
-      }, error => {
-        alert(error);
-      });
-    }
-  }
-
+  // Update User Story
   update(id: number) {
     const modalRef = this.modalService.open(UserStoryUpdateComponent);
     modalRef.componentInstance.userStoryId = id;
     modalRef.componentInstance.projectId = this.projectId;
     modalRef.componentInstance["userStoryUpdated"].subscribe(event => {
-      // TODO emit value -- this.getAllUserStoriesBySprintId(this.activeSprint.id);
+      this.userStoryUD.emit();
     });
+  }
+
+  // Delete User Story
+  delete(id: number) {
+    if (confirm("Are you sure to delete Usser Story")) {
+      this.userStoryService.delete(id).subscribe(() => {
+        this.userStoryUD.emit();
+      }, error => {
+        alert(error);
+      });
+    }
   }
 
 }

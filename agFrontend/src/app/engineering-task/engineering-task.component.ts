@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { EngineeringTask } from './model/engineering-task';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EngineeringTaskUpdateComponent } from './engineering-task-update/engineering-task-update.component';
@@ -16,7 +16,11 @@ export class EngineeringTaskComponent implements OnInit, OnDestroy {
   private routeSub: Subscription;
   private projectId: number;
 
+  // Input
   @Input() engineeringTask: EngineeringTask;
+
+  // Output
+  @Output() engineeringTaskUD: EventEmitter<any> = new EventEmitter();
 
   constructor(private modalService: NgbModal,
     private route: ActivatedRoute,
@@ -35,15 +39,14 @@ export class EngineeringTaskComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.projectId = this.projectId;
     modalRef.componentInstance.engineeringTaskId = this.engineeringTask.id;
     modalRef.componentInstance["engineeringTaskUpdated"].subscribe(event => {
-      location.reload(true);
+      this.engineeringTaskUD.emit();
     });
   }
 
-  // TODO
   delete(id: number) {
     if (confirm("Are you sure to delete Engineering Task")) {
       this.engineeringTaskService.delete(id).subscribe(() => {
-
+        this.engineeringTaskUD.emit();
       }, error => {
         alert(error);
       });

@@ -18,7 +18,10 @@ export class EngineeringTaskCreateComponent implements OnInit {
   submitted: boolean = false;
   userStories: UserStory[];
 
+  // Input
   @Input() projectId: number;
+
+  // Output
   @Output() engineeringTaskCreated: EventEmitter<any> = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,
@@ -60,6 +63,7 @@ export class EngineeringTaskCreateComponent implements OnInit {
       return;
     }
 
+    // Start Submitted Loading
     this.submittedLoading = true;
     this.engineeringTaskService.create(this.createForm.value).pipe(first()).subscribe(
       data => {
@@ -68,6 +72,7 @@ export class EngineeringTaskCreateComponent implements OnInit {
         this.engineeringTaskCreated.emit();
       },
       error => {
+        // Stop Submitted Loading
         this.submittedLoading = false;
         alert(error);
       }

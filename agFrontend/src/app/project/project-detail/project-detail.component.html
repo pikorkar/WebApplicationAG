@@ -2,8 +2,8 @@
     <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
 
     <div *ngIf="!loading">
-        <app-header
-            [activeSprintId]="activeSprint.id">
+        <app-header [activeSprintId]="activeSprint.id"
+            (engTaskUsStoryCreated)="getAllUserStoriesBySprintId(activeSprint.id);">
         </app-header>
         <div *ngIf="this.sprints.length > 0" class="card mt-4">
             <div class="card-header pt-3 pb-3">
@@ -20,9 +20,8 @@
             </div>
             <ul *ngIf="this.userStories" class="list-group">
                 <li *ngFor="let userStory of userStories" class="list-group-item">
-                    <app-user-story
-                        [userStory]="userStory"
-                        [projectId]="projectId">
+                    <app-user-story [userStory]="userStory" [projectId]="projectId"
+                        (userStoryUD)="getAllUserStoriesBySprintId(activeSprint.id)">
                     </app-user-story>
                 </li>
             </ul>

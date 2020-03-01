@@ -27,6 +27,7 @@ export class ProjectComponent implements OnInit {
     this.getAll();
   }
 
+  // Get all Projects
   getAll() {
     this.loading = true;
     this.projectService.getAll().pipe(first()).subscribe(projects => {
@@ -38,17 +39,20 @@ export class ProjectComponent implements OnInit {
     });
   }
 
-  create() {
+  // Navigate to project detail
+  getDetail(id: number) {
+    this.router.navigateByUrl(`projects/${id}`);
+  }
+
+   // Create Project - open modal form
+   create() {
     const modalRef = this.modalService.open(ProjectCreateComponent);
     modalRef.componentInstance["projectCreated"].subscribe(event => {
       this.getAll();
     });
   }
 
-  getDetail(id: number) {
-    this.router.navigateByUrl(`projects/${id}`);
-  }
-
+  // Delete Project
   delete(id: number) {
     if (confirm("Are you sure to delete project")) {
       this.projectService.delete(id).subscribe(() => {

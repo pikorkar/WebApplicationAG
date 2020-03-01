@@ -64,7 +64,7 @@ export class UserStoryUpdateComponent implements OnInit {
         data => {
           this.activeModal.close();
           alert('User Story has been saved.');
-          this.userStoryUpdated.emit(); // TODO
+          this.userStoryUpdated.emit();
         },
         error => {
           this.submittedLoading = false;

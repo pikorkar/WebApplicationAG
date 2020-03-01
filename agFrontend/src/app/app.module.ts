@@ -24,6 +24,8 @@ import { UserStoryComponent } from './user-story/user-story.component';
 import { EngineeringTaskComponent } from './engineering-task/engineering-task.component';
 import { HeaderComponent } from './header/header.component';
 import { UserStoryUpdateComponent } from './user-story/user-story-update/user-story-update.component';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { UserStoryUpdateComponent } from './user-story/user-story-update/user-st
     UserStoryComponent,
     EngineeringTaskComponent,
     HeaderComponent,
-    UserStoryUpdateComponent
+    UserStoryUpdateComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import { UserStoryUpdateComponent } from './user-story/user-story-update/user-st
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
+    { provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [
     AppComponent

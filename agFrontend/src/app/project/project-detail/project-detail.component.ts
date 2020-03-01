@@ -82,6 +82,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
 
   // Return User Stories in selected Sprint
   getAllUserStoriesBySprintId(id: number) {
+    this.loading = true;
     this.userStoryService.getAllBySprint(id).pipe(first()).subscribe(userStories => {
       this.userStories = userStories;
       this.loading = false;

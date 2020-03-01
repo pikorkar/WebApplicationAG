@@ -20,7 +20,8 @@
         <ul class="list-group list-group-flush">
             <li *ngFor="let engineeringTask of userStory.engineeringTasks"
                 class="list-group-item user-story_engineering-task">
-                <app-engineering-task [engineeringTask]="engineeringTask">
+                <app-engineering-task [engineeringTask]="engineeringTask"
+                    (engineeringTaskUD)="getEngineeringTasks(userStory)">
                 </app-engineering-task>
             </li>
         </ul>

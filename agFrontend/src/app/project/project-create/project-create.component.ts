@@ -14,6 +14,7 @@ export class ProjectCreateComponent implements OnInit {
   loading: boolean = false;
   submitted: boolean = false;
 
+  // Output
   @Output() projectCreated: EventEmitter<any> = new EventEmitter();
   
   constructor(private formBuilder: FormBuilder,

@@ -30,8 +30,11 @@ export class EngineeringTaskUpdateComponent implements OnInit {
     { value: Status.Done, label: 'Done' }
   ];
 
+  // Input
   @Input() projectId: number;
   @Input() engineeringTaskId: number;
+
+  // Output
   @Output() engineeringTaskUpdated: EventEmitter<any> = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,
@@ -115,13 +118,13 @@ export class EngineeringTaskUpdateComponent implements OnInit {
   }
 
   removeError(control: AbstractControl, error: string) {
-    const err = control.errors; // get control errors
+    const err = control.errors;
     if (err) {
-      delete err[error]; // delete your own error
-      if (!Object.keys(err).length) { // if no errors left
-        control.setErrors(null); // set control errors to null making it VALID
+      delete err[error]; 
+      if (!Object.keys(err).length) { 
+        control.setErrors(null); 
       } else {
-        control.setErrors(err); // controls got other errors so set them back
+        control.setErrors(err);
       }
     }
   }

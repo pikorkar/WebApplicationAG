@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -20,7 +20,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private projectId: number;
   public projectName: string;
 
+  // Input
   @Input() activeSprintId: number;
+
+  // Output
+  @Output() engTaskUsStoryCreated: EventEmitter<any> = new EventEmitter();
 
   constructor(private route: ActivatedRoute,
     private modalService: NgbModal,
@@ -54,7 +58,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.sprintId = this.activeSprintId;
     modalRef.componentInstance.projectId = this.projectId;
     modalRef.componentInstance["userStoryCreated"].subscribe(event => {
-      // TODO emit value -- this.getAllUserStoriesBySprintId(this.activeSprint.id);
+      this.engTaskUsStoryCreated.emit();
     });
   }
 
@@ -63,7 +67,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(EngineeringTaskCreateComponent);
     modalRef.componentInstance.projectId = this.projectId;
     modalRef.componentInstance["engineeringTaskCreated"].subscribe(event => {
-      // TODO location.reload(true);
+      this.engTaskUsStoryCreated.emit();
     });
   }
 

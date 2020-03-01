@@ -14,11 +14,15 @@ import { Sprint } from 'src/app/models/sprint';
 export class UserStoryCreateComponent implements OnInit {
   createForm: FormGroup;
   loading: boolean = false;
+  submittedLoading: boolean = false;
   submitted: boolean = false;
   sprints: Sprint[];
 
+  // Input
   @Input() sprintId: number;
   @Input() projectId: number;
+
+  // Output
   @Output() userStoryCreated: EventEmitter<any> = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,
@@ -55,7 +59,8 @@ export class UserStoryCreateComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
+    // Start Submitted Loading
+    this.submittedLoading = true;
     this.userStoryService.create(this.createForm.value, this.sprintId).pipe(first()).subscribe(
       data => {
         this.activeModal.close();
@@ -63,7 +68,8 @@ export class UserStoryCreateComponent implements OnInit {
         this.userStoryCreated.emit();
       },
       error => {
-        this.loading = false;
+        // End Submitted Loading 
+        this.submittedLoading = false;
         alert(error);
       }
     )
