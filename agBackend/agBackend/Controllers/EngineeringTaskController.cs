@@ -31,6 +31,19 @@ namespace agBackend.Controllers
             _mapper = mapper;
         }
 
+        // GET by id
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var engineeringTask = _engineeringTaskService.GetById(id);
+
+            if (engineeringTask == null)
+                return NotFound();
+
+            return Ok(engineeringTask);
+        }
+
+        // GET all in User Story
         [HttpGet("userstory/{id}")]
         public IActionResult GetAllByUserStory(int id)
         {
@@ -42,6 +55,7 @@ namespace agBackend.Controllers
             return Ok(model);
         }
 
+        // Create
         [HttpPost("create")]
         public IActionResult Create([FromBody]EngineeringTaskCreateModel model)
         {
@@ -58,6 +72,7 @@ namespace agBackend.Controllers
             }
         }
 
+        // Update
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]EngineeringTaskUpdateModel model)
         {
@@ -74,18 +89,8 @@ namespace agBackend.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
-
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var engineeringTask = _engineeringTaskService.GetById(id);
-
-            if (engineeringTask == null)
-                return NotFound();
-
-            return Ok(engineeringTask);
-        }
-
+        
+        // Delete
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

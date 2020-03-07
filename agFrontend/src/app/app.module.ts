@@ -27,6 +27,7 @@ import { UserStoryUpdateComponent } from './user-story/user-story-update/user-st
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AlertComponent } from './alert/alert.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AlertComponent } from './alert/alert.component';
     HttpClientModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
-    NgbModule
+    NgbModule,
+    RouterModule.forRoot([]),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },

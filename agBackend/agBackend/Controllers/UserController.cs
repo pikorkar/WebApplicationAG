@@ -32,6 +32,7 @@ namespace agBackend.Controllers
             _appSettings = appSettings.Value;
         }
 
+        // Authenticate User
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]AuthenticateModel model) {
@@ -41,7 +42,6 @@ namespace agBackend.Controllers
                 return BadRequest(new { message = "Username or password is incorrect" });
 
             // token start
-
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -56,7 +56,6 @@ namespace agBackend.Controllers
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
-
             //token end
 
             // return user with token
@@ -71,31 +70,20 @@ namespace agBackend.Controllers
             });
         }
 
-        [AllowAnonymous]
-        [HttpPost("register")]
-        public IActionResult Register([FromBody]RegisterModel model) {
-            var user = _mapper.Map<User>(model);
-
-            try
-            {
-                _userService.Create(user, model.Password);
-                return Ok();
-            }
-            catch (AppException ex) {
-                return BadRequest(new { message = ex.Message });
-            }
-        }
-
+        // GET all
         //[Authorize(Roles = Role.Admin)]
         [HttpGet]
-        public IActionResult GetAll() {
+        public IActionResult GetAll()
+        {
             var users = _userService.GetAll();
             var model = _mapper.Map<IList<UserModel>>(users);
             return Ok(model);
         }
 
+        // GET by id
         [HttpGet("{id}")]
-        public IActionResult GetById(int id) {
+        public IActionResult GetById(int id)
+        {
             var currentUserId = int.Parse(User.Identity.Name);
 
             if (id != currentUserId && !User.IsInRole(Role.Admin))
@@ -111,6 +99,23 @@ namespace agBackend.Controllers
             return Ok(model);
         }
 
+        // Create
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register([FromBody]RegisterModel model) {
+            var user = _mapper.Map<User>(model);
+
+            try
+            {
+                _userService.Create(user, model.Password);
+                return Ok();
+            }
+            catch (AppException ex) {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        // Update
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]UpdateModel model) {
             var user = _mapper.Map<User>(model);
@@ -126,6 +131,7 @@ namespace agBackend.Controllers
             }
         }
 
+        // Delete
         [HttpDelete("{id}")]
         public IActionResult Delete(int id) {
             _userService.Delete(id);

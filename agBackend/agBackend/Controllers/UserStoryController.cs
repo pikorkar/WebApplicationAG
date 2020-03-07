@@ -29,7 +29,19 @@ namespace agBackend.Controllers
             _mapper = mapper;
         }
 
+        // GET all by Project
+        [HttpGet("project/{id}")]
+        public IActionResult GetAllByProject(int id)
+        {
+            var model = _userStoryService.GetAllByProject(id);
 
+            if (model == null)
+                return NotFound();
+
+            return Ok(model);
+        }
+
+        // GET all by Sprint
         [HttpGet("sprint/{id}")]
         public IActionResult GetAllBySprint(int id)
         {
@@ -41,6 +53,19 @@ namespace agBackend.Controllers
             return Ok(model);
         }
 
+        // GET by id
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var userStory = _userStoryService.GetById(id);
+
+            if (userStory == null)
+                return NotFound();
+
+            return Ok(userStory);
+        }
+
+        // Create
         [HttpPost("create")]
         public IActionResult Create([FromBody]UserStoryCreateModel model)
         {
@@ -57,25 +82,7 @@ namespace agBackend.Controllers
             }
         }
 
-        [HttpGet("project/{id}")]
-        public IActionResult GetAllByProject(int id)
-        {
-            var model = _userStoryService.GetAllByProject(id);
-
-            if (model == null)
-                return NotFound();
-
-            return Ok(model);
-        }
-
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            _userStoryService.Delete(id);
-            return Ok();
-        }
-
+        // Update
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]UserStoryUpdateModel model)
         {
@@ -93,15 +100,12 @@ namespace agBackend.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        // Delete
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            var userStory = _userStoryService.GetById(id);
-
-            if (userStory == null)
-                return NotFound();
-
-            return Ok(userStory);
+            _userStoryService.Delete(id);
+            return Ok();
         }
 
     }

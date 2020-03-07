@@ -21,6 +21,7 @@ namespace agBackend.Services
             _context = context;
         }
 
+        // GET all by Project
         public IEnumerable<SprintModel> GetAllByProject(int id)
         {
             return _context.Sprints.Where(x => x.ProjectId == id);

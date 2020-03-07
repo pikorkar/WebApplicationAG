@@ -22,6 +22,7 @@ namespace agBackend.Controllers
             _mapper = mapper;
         }
 
+        // GET all
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -29,6 +30,19 @@ namespace agBackend.Controllers
             return Ok(model);
         }
 
+        // GET by id
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var project = _projectService.GetById(id);
+
+            if (project == null)
+                return NotFound();
+
+            return Ok(project);
+        }
+
+        // Create
         [HttpPost("create")]
         public IActionResult Create([FromBody]ProjectCreateModel model)
         {
@@ -43,17 +57,7 @@ namespace agBackend.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var project = _projectService.GetById(id);
-
-            if (project == null)
-                return NotFound();
-
-            return Ok(project);
-        }
-
+        // Delete
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

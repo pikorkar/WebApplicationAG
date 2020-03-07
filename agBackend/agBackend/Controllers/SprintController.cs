@@ -30,7 +30,7 @@ namespace agBackend.Controllers
             _mapper = mapper;
         }
 
-
+        //GET all by Project
         [HttpGet("project/{id}")]
         public IActionResult GetAllByProject(int id)
         {

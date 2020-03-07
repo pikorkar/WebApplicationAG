@@ -23,18 +23,27 @@ namespace agBackend.Services
             _context = context;
         }
 
+        // GET all by User Story
         public IEnumerable<EngineeringTaskModel> GetAllByUserStory(int id)
         {
             return _context.EngineeringTasks.Where(x => x.UserStoryId == id);
         }
 
+        // GET by id
+        public EngineeringTaskModel GetById(int id)
+        {
+            return _context.EngineeringTasks.Find(id);
+        }
+
+        // Create
         public EngineeringTaskModel Create(EngineeringTaskModel model)
         {
             if (_context.EngineeringTasks.Any(x => x.Name == model.Name))
             {
-                throw new AppException("Name is already taken.");
+                throw new AppException("Name \"" + model.Name + "\" is already taken.");
             }
 
+            // Create - no done hours
             model.DoneHours = 0;
             _context.EngineeringTasks.Add(model);
             _context.SaveChanges();
@@ -42,17 +51,19 @@ namespace agBackend.Services
             return model;
         }
 
+        // Update
         public void Update(EngineeringTaskModel engineeringTaskParam)
         {
             var engineeringTask = _context.EngineeringTasks.Find(engineeringTaskParam.Id);
 
+            // Not found
             if (engineeringTask == null)
                 throw new AppException("Engineering task not found.");
 
             if (!string.IsNullOrWhiteSpace(engineeringTaskParam.Name) && engineeringTaskParam.Name != engineeringTask.Name)
             {
                 if (_context.EngineeringTasks.Any(x => x.Name == engineeringTaskParam.Name))
-                    throw new AppException("Name " + engineeringTask.Name + "is already taken.");
+                    throw new AppException("Name \"" + engineeringTask.Name + "\" is already taken.");
 
                 engineeringTask.Name = engineeringTaskParam.Name;
             }
@@ -79,14 +90,11 @@ namespace agBackend.Services
             _context.SaveChanges();
         }
 
-        public EngineeringTaskModel GetById(int id)
-        {
-            return _context.EngineeringTasks.Find(id);
-        }
-
+        // Delete
         public void Delete(int id)
         {
             var engineeringTask = _context.EngineeringTasks.Find(id);
+            // If found
             if (engineeringTask != null)
             {
                 _context.EngineeringTasks.Remove(engineeringTask);

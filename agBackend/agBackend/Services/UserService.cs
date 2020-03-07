@@ -23,20 +23,15 @@ namespace agBackend.Services
             _context = context;
         }
 
-        //public UserService(IOptions<AppSettings> appSettings) {
-        //    _appSettings = appSettings.Value;
-        //}
 
+        // Authenticate User
         public User Authenticate(string username, string password) {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return null;
 
             var user = _context.Users.SingleOrDefault(x => x.Username == username);
 
-
-            //var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
-
-            // user not found
+            // Not found
             if (user == null) {
                 return null;
             }
@@ -44,21 +39,20 @@ namespace agBackend.Services
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
 
-            //return user.WithoutPassword();
             return user;
         }
 
+        // GET all
         public IEnumerable<User> GetAll() {
             return _context.Users;
-            //return _users.WithoutPasswords();      
         }
 
+        // GET by id
         public User GetById(int id) {
             return _context.Users.Find(id);
-            //var user = _users.FirstOrDefault(x => x.Id == id);
-            //return user.WithoutPassword();
         }
 
+        // Create
         public User Create(User user, string password) {
             if (string.IsNullOrEmpty(password)) {
                 throw new AppException("Password is required.");
@@ -80,6 +74,7 @@ namespace agBackend.Services
             return user;
         }
 
+        // Update
         public void Update(User userParam, string password = null) {
             var user = _context.Users.Find(userParam.Id);
 
@@ -88,7 +83,7 @@ namespace agBackend.Services
 
             if (!string.IsNullOrWhiteSpace(userParam.Username) && userParam.Username != user.Username) {
                 if (_context.Users.Any(x => x.Username == userParam.Username))
-                    throw new AppException("Username " + user.Username + "is already taken.");
+                    throw new AppException("Username \"" + user.Username + "\" is already taken.");
 
                 user.Username = userParam.Username;
             }
@@ -101,6 +96,7 @@ namespace agBackend.Services
 
             if (!string.IsNullOrWhiteSpace(password)) {
                 byte[] passwordHash, passwordSalt;
+                // Crate ne Password Hash
                 CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
                 user.PasswordHash = passwordHash;
@@ -111,14 +107,17 @@ namespace agBackend.Services
             _context.SaveChanges();
         }
 
+        // Delete
         public void Delete(int id) {
             var user = _context.Users.Find(id);
+            // If found
             if (user != null) {
                 _context.Users.Remove(user);
                 _context.SaveChanges();
             }
         }
 
+        // Cerate Password Hash, out passwordHash, passwordSalt
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt) {
             if (password == null)
                 throw new ArgumentNullException("password");
@@ -131,6 +130,7 @@ namespace agBackend.Services
             }
         }
 
+        // Verify Password Hash
         private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt) {
             if (password == null)
                 throw new ArgumentNullException("password");
