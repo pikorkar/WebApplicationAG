@@ -16,7 +16,7 @@ export class UserStoryComponent implements OnInit {
   public isExpanded: boolean = false;
 
   // Input
-  @Input() userStory: UserStory;
+  @Input() userStory: UserStory = null;
   @Input() projectId: number = null;
 
    // Output
@@ -36,19 +36,21 @@ export class UserStoryComponent implements OnInit {
   }
 
   getEngineeringTasks(userStory: UserStory) {
-    this.engineeringTaskService.getAllByUserStory(userStory.id).pipe(first()).subscribe(engineeringTasks => {
-      userStory.engineeringTasks = engineeringTasks;
-      userStory.hoursRemaining = 0;
-      userStory.donePercent = 0;
-      for (let engineeringTask of userStory.engineeringTasks) {
-        userStory.hoursRemaining += engineeringTask.estimatedHours - engineeringTask.doneHours;
-        userStory.donePercent += engineeringTask.estimatedHours;
-      }
-      userStory.donePercent = Math.round(((userStory.donePercent - userStory.hoursRemaining) * 100) / userStory.donePercent);
-      if (Number.isNaN(userStory.donePercent)) userStory.donePercent = 0;
-    }, error => {
-      alert(error);
-    });
+    if (userStory) {
+      this.engineeringTaskService.getAllByUserStory(userStory.id).pipe(first()).subscribe(engineeringTasks => {
+        userStory.engineeringTasks = engineeringTasks;
+        userStory.hoursRemaining = 0;
+        userStory.donePercent = 0;
+        for (let engineeringTask of userStory.engineeringTasks) {
+          userStory.hoursRemaining += engineeringTask.estimatedHours - engineeringTask.doneHours;
+          userStory.donePercent += engineeringTask.estimatedHours;
+        }
+        userStory.donePercent = Math.round(((userStory.donePercent - userStory.hoursRemaining) * 100) / userStory.donePercent);
+        if (Number.isNaN(userStory.donePercent)) userStory.donePercent = 0;
+      }, error => {
+        alert(error);
+      });
+    }
   }
 
   // Update User Story

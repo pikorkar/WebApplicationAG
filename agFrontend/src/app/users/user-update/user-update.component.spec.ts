@@ -1,15 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserUpdateComponent } from './user-update.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 
-
-describe('UpdateComponent', () => {
+describe('UserUpdateComponent', () => {
   let component: UserUpdateComponent;
   let fixture: ComponentFixture<UserUpdateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserUpdateComponent ]
+      imports: [ ReactiveFormsModule, HttpClientTestingModule ],
+      declarations: [ UserUpdateComponent ],
+      providers: [ NgbActiveModal ]
     })
     .compileComponents();
   }));

@@ -59,8 +59,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // Can delete Project
   get canActivate(): boolean {
-    if (this.authenticationService.currentUserValue.role === Role.Admin ||
-      this.authenticationService.currentUserValue.role === Role.ProductOwner)
+    if (this.authenticationService.currentUserValue && (this.authenticationService.currentUserValue.role === Role.Admin ||
+      this.authenticationService.currentUserValue.role === Role.ProductOwner))
       return true;
     return false;
   }

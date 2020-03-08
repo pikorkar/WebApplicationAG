@@ -1,4 +1,4 @@
-<div class="engineering-task">
+<div *ngIf="engineeringTask" class="engineering-task">
     <span class="engineering-task_name" (click)="update()">{{ engineeringTask.name }}</span>
     <button type="button"
         class="btn btn-danger engineering-task_button-item" (click)="delete(engineeringTask.id)">Delete</button>
