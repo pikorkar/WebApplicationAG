@@ -8,8 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './user-register.component.html',
-  styleUrls: ['./user-register.component.scss']
+  templateUrl: './user-register.component.html'
 })
 export class UserRegisterComponent implements OnInit {
   registerForm: FormGroup;

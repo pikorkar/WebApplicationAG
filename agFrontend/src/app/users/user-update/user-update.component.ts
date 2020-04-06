@@ -9,8 +9,7 @@ import { AlertService } from 'src/app/alert/service/alert.service';
 
 @Component({
   selector: 'app-update',
-  templateUrl: './user-update.component.html',
-  styleUrls: ['./user-update.component.scss']
+  templateUrl: './user-update.component.html'
 })
 export class UserUpdateComponent implements OnInit {
   user: User;

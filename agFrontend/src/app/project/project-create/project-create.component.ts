@@ -7,8 +7,7 @@ import { AlertService } from 'src/app/alert/service/alert.service';
 
 @Component({
   selector: 'app-project-create',
-  templateUrl: './project-create.component.html',
-  styleUrls: ['./project-create.component.scss']
+  templateUrl: './project-create.component.html'
 })
 export class ProjectCreateComponent implements OnInit {
   createForm: FormGroup;

@@ -8,8 +8,7 @@ import { UserStoryService } from 'src/app/user-story/service/user-story.service'
 
 @Component({
   selector: 'app-engineering-task-create',
-  templateUrl: './engineering-task-create.component.html',
-  styleUrls: ['./engineering-task-create.component.scss']
+  templateUrl: './engineering-task-create.component.html'
 })
 export class EngineeringTaskCreateComponent implements OnInit {
   createForm: FormGroup;

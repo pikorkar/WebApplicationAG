@@ -8,8 +8,7 @@ import { Sprint } from 'src/app/models/sprint';
 
 @Component({
   selector: 'app-user-story-create',
-  templateUrl: './user-story-create.component.html',
-  styleUrls: ['./user-story-create.component.scss']
+  templateUrl: './user-story-create.component.html'
 })
 export class UserStoryCreateComponent implements OnInit {
   createForm: FormGroup;

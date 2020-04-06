@@ -12,8 +12,7 @@ import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-engineering-task-update',
-  templateUrl: './engineering-task-update.component.html',
-  styleUrls: ['./engineering-task-update.component.scss']
+  templateUrl: './engineering-task-update.component.html'
 })
 export class EngineeringTaskUpdateComponent implements OnInit {
   updateForm: FormGroup;

@@ -9,8 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-story-update',
-  templateUrl: './user-story-update.component.html',
-  styleUrls: ['./user-story-update.component.scss']
+  templateUrl: './user-story-update.component.html'
 })
 export class UserStoryUpdateComponent implements OnInit {
   updateForm: FormGroup;
