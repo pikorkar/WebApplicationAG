@@ -63,8 +63,8 @@
                         [ngClass]="{ 'is-invalid': submitted && f.doneHours.errors }" />
                     <div *ngIf="submitted && f.doneHours.errors" class="invalid-feedback">
                         <div *ngIf="f.doneHours.errors.required">Done Hours is required</div>
-                        <div *ngIf="f.doneHours.errors.moreDoneHours">Done hours must not vetsi nez estimated</div>
-                        <div *ngIf="f.doneHours.errors.doneHoursAreEqual">Status done: estimated hours = done hours</div> 
+                        <div *ngIf="f.doneHours.errors.moreDoneHours">Done hours must not be greater than estimated</div>
+                        <div *ngIf="f.doneHours.errors.doneHoursAreEqual">Status done: Estimated Hours must be same as Done Hours</div> 
                     </div>
                 </div>
                 <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
